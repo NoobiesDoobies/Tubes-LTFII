@@ -23,7 +23,7 @@ String deviceName = "qwer";
 // const float stepsPerRevolution = 2048;  // jumlah langkah per satu putaran penuh
 // const float revolution = 360; // 1 revolusi penuh 360 derajat
 // float step_angle = revolution / stepsPerRevolution;
-// int servo = AO0;
+// int servo =  AO0;
 // double sudutServo = 0;
 // double sudutStepper = 0;
 // int t_pwm;
