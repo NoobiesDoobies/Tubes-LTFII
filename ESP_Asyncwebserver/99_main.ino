@@ -7,13 +7,13 @@
 void setup() {
   Serial.begin(115200);
   initWiFi();
-  initSPIFFS();
+//  initSPIFFS();
 
 
     // Web Server Root URL
-  server.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
-    request->send(SPIFFS, "/index.html", "text/html");
-  });
+//  server.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
+//    request->send(SPIFFS, "/index.html", "text/html");
+//  });
 
 //  server.on("/updatePos", HTTP_GET, [](AsyncWebServerRequest *request){
 //    AsyncResponseStream *response = request->beginResponseStream("application/json");
@@ -27,18 +27,31 @@ void setup() {
 //      request->send(response);
 //  });
 
-   server.on("/updateJoyStickValue", HTTP_POST, [](AsyncWebServerRequest *request){  
+    server.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
+      request->send(200, "text/plain", "Hello world");
+    });
+   server.on("/posts", HTTP_GET, [](AsyncWebServerRequest *request){
+    Serial.println("GETTING");
+    request->send(200, "text/plain", "HALLOO");
+   });
+   server.on("/posts", HTTP_POST, [](AsyncWebServerRequest *request){  
+      Serial.println("ACTION!");
+    
       int params = request->params();
-      AsyncWebParameter *p = request->getParam(0);
-      joystick.x = atoi(p->value().c_str());
-      p = request->getParam(1);
-      joystick.y = atoi(p->value().c_str());
+      for (int i = 0; i < params; i++)
+      {
+        AsyncWebParameter* p = request->getParam(i);
+        Serial.printf("POST[%s]: %s\n", p->name().c_str(), p->value().c_str());
+      }
       
-      request->send(SPIFFS, "/index.html", "text/html");
+      AsyncWebServerResponse *response = request->beginResponse(200, "text/plain", "OK");
+      response->addHeader("Test-Header", "My Header value");
+      
+      request->send(200, "text/plain", "OK");
    });
    
 
-  server.serveStatic("/", SPIFFS, "/");
+//  server.serveStatic("/", SPIFFS, "/");
 
   events.onConnect([](AsyncEventSourceClient *client){
     if(client->lastId()){
@@ -57,5 +70,5 @@ void setup() {
 
 void loop() {
   updatePositionXY();
-  Serial.println("x: " + String(x) + "\ty: " + String(y));
+//  Serial.println("x: " + String(x) + "\ty: " + String(y));
 }
