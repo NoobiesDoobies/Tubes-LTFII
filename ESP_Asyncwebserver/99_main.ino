@@ -3,40 +3,47 @@
 #include <ArduinoJson.h>
 
 
-
 void setup() {
   Serial.begin(115200);
   initWiFi();
-//  initSPIFFS();
-
-
-    // Web Server Root URL
-//  server.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
-//    request->send(SPIFFS, "/index.html", "text/html");
-//  });
-
-//  server.on("/updatePos", HTTP_GET, [](AsyncWebServerRequest *request){
-//    AsyncResponseStream *response = request->beginResponseStream("application/json");
-//      DynamicJsonDocument json(1024);
-//      json["x_pos"] = x_pos;
-//      json["y_pos"] = y_pos;
-//      json["theta_pos"] = theta_pos;
-//      Serial.print("x_pos: ");
-//      Serial.println(x_pos);
-//      serializeJson(json, *response);
-//      request->send(response);
-//  });
-
     server.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
-      request->send(200, "text/plain", "Hello world");
+      Serial.println("GETTING /");
+      AsyncResponseStream *response = request->beginResponseStream("application/json");
+      DynamicJsonDocument json(1024);
+      json["status"] = "ok";
+      json["ssid"] = WiFi.SSID();
+      json["ip"] = WiFi.softAPIP().toString();
+      serializeJson(json, *response);
+      request->send(response);
     });
    server.on("/posts", HTTP_GET, [](AsyncWebServerRequest *request){
-    Serial.println("GETTING");
-    request->send(200, "text/plain", "HALLOO");
+      Serial.println("GETTING");
+      int paramsNr = request->params();
+      Serial.println(paramsNr);
+      for(int i=0;i<paramsNr;i++){
+ 
+         AsyncWebParameter* p = request->getParam(i);
+     
+         Serial.print("Param name: ");
+         Serial.println(p->name());
+     
+         Serial.print("Param value: ");
+         Serial.println(p->value());
+     
+         Serial.println("------");
+      }
+      
+      AsyncResponseStream *response = request->beginResponseStream("application/json");
+      DynamicJsonDocument json(1024);
+      json["status"] = "ok";
+      json["ssid"] = WiFi.SSID();
+      json["ip"] = WiFi.softAPIP().toString();
+      serializeJson(json, *response);
+      request->send(response);
    });
    server.on("/posts", HTTP_POST, [](AsyncWebServerRequest *request){  
       Serial.println("ACTION!");
-    
+      
       int params = request->params();
       for (int i = 0; i < params; i++)
       {
@@ -44,10 +51,14 @@ void setup() {
         Serial.printf("POST[%s]: %s\n", p->name().c_str(), p->value().c_str());
       }
       
-      AsyncWebServerResponse *response = request->beginResponse(200, "text/plain", "OK");
-      response->addHeader("Test-Header", "My Header value");
       
-      request->send(200, "text/plain", "OK");
+      AsyncResponseStream *response = request->beginResponseStream("application/json");
+      DynamicJsonDocument json(1024);
+      json["status"] = "ok";
+      json["ssid"] = WiFi.SSID();
+      json["ip"] = WiFi.softAPIP().toString();
+      serializeJson(json, *response);
+      request->send(response);
    });
    
 

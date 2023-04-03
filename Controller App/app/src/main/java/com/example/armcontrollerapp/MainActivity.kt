@@ -1,18 +1,24 @@
 package com.example.armcontrollerapp
 
+import android.content.Context
 import android.content.pm.ActivityInfo
 import android.os.Bundle
+import android.view.Window
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import okhttp3.*
-import okhttp3.MediaType.Companion.toMediaType
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers.IO
+import java.io.DataOutputStream
 import java.io.IOException
+import java.net.HttpURLConnection
 import java.net.URL
 
 class MainActivity : AppCompatActivity() {
+    val TIME_OUT = 1000L
     private var x: Double = 0.0
     private var y: Double = 0.0
     private var z: Double = 0.0
@@ -20,31 +26,32 @@ class MainActivity : AppCompatActivity() {
     private var yIncrement: Double = 0.7
     private var zIncrement: Double = 0.3
 
-    var client: OkHttpClient = OkHttpClient();
-    private var url: String = "http://192.168.4.1/posts"
+    private var BASE_URL: String = "http://192.168.4.1"
 
-    private fun sendJoyStickPosition(x: Double, y: Double, z: Double): String {
-        println("SENDING DATA TO ARDUINO")
-//        var body = FormBody.Builder()
-//            .add("x", x.toString())
-//            .add("y", y.toString())
-//            .add("z", z.toString())
-//            .build()
-        var json: String = String.format("{\"x\":%.1f,\"y\":%.1f,\"z\":%.1f}", x, y, z)
-        var body = RequestBody.create("application/json".toMediaTypeOrNull(), json)
+    public suspend fun sendDataToESP(): Unit{
+        val url = URL(BASE_URL + "/posts" + "?x=$x&y=$y&z=$z")
 
-        var request = Request.Builder()
-            .url(url)
-            .post(body)
-            .build()
-        client.newCall(request).execute().use { response ->
-            if (!response.isSuccessful) throw IOException("Unexpected code $response")
+        val job = withTimeoutOrNull(TIME_OUT){
+            with(url.openConnection() as HttpURLConnection) {
+                requestMethod = "GET"  // optional default is GET
 
-            println(response.body!!.string())
-            return response.body!!.string()
+                println("\nSent 'GET' request to URL : $url; Response Code : $responseCode")
+
+                inputStream.bufferedReader().use {
+                    it.lines().forEach { line ->
+                        println(line)
+                    }
+                }
+            }
+        }
+        if(job == null){
+            val cancelMessage = "Job took longer than $TIME_OUT"
+            println("debug: $cancelMessage")
         }
 
     }
+
+
 
     fun alert(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT)
@@ -55,6 +62,8 @@ class MainActivity : AppCompatActivity() {
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+
 
         val btnLeft = findViewById<Button>(R.id.btnLeft)
         val btnRight = findViewById<Button>(R.id.btnRight)
@@ -69,36 +78,55 @@ class MainActivity : AppCompatActivity() {
         val zText = findViewById<TextView>(R.id.zText)
 
 
+
         btnLeft.setOnClickListener{
             x-=xIncrement
             xText.text = String.format("x: %.1f", x)
-            sendJoyStickPosition(x, y, z)
+            CoroutineScope(IO).launch{
+                sendDataToESP()
+            }
         }
 
         btnRight.setOnClickListener{
             x+=xIncrement
             xText.text = String.format("x: %.1f", x)
+            CoroutineScope(IO).launch{
+                sendDataToESP()
+            }
         }
 
         btnUp.setOnClickListener{
             y+=yIncrement
             yText.text = String.format("y: %.1f", y)
+            CoroutineScope(IO).launch{
+                sendDataToESP()
+            }
         }
 
         btnDown.setOnClickListener{
             y-=yIncrement
             yText.text = String.format("y: %.1f", y)
+            CoroutineScope(IO).launch{
+                sendDataToESP()
+            }
+
         }
 
         btnZPos.setOnClickListener{
             z += zIncrement
             zText.text = String.format("z: %.1f", z)
+            CoroutineScope(IO).launch{
+                sendDataToESP()
+            }
 
         }
 
         btnZNeg.setOnClickListener{
             z -= zIncrement
             zText.text = String.format("z: %.1f", z)
+            CoroutineScope(IO).launch{
+                sendDataToESP()
+            }
         }
 
         btnCalibrate.setOnClickListener{
@@ -111,6 +139,11 @@ class MainActivity : AppCompatActivity() {
             yText.text = String.format("y: %.1f", y)
             zText.text = String.format("z: %.1f", z)
             alert("Calibrated successfully to (0,0,0)")
+            CoroutineScope(IO).launch{
+                sendDataToESP()
+            }
         }
     }
+
+
 }
