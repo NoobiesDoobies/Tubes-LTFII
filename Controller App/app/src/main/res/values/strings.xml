@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Arm Controller App</string>
+    <string name="selected_mode">Selected mode: </string>
+    <string-array name="mode">
+        <item>Arrows</item>
+        <item>JoyStick</item>
+        <item>Slider</item>
+    </string-array>
 </resources>

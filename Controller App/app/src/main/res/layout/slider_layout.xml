@@ -9,89 +9,6 @@
     tools:layout_editor_absoluteY="-5dp">
 
 
-        
-    <Button
-        android:id="@+id/btnZPos"
-        android:layout_width="79dp"
-        android:layout_height="64dp"
-        android:layout_marginBottom="156dp"
-        android:text="\u2191"
-
-        android:textSize="32dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.844"
-        app:layout_constraintStart_toEndOf="@+id/btnUp" />
-
-    <Button
-        android:id="@+id/btnZNeg"
-        android:layout_width="79dp"
-        android:layout_height="64dp"
-        android:layout_marginBottom="40dp"
-
-        android:text="\u2193"
-        android:textSize="32dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.844"
-        app:layout_constraintStart_toEndOf="@+id/btnDown"
-        app:layout_constraintTop_toBottomOf="@+id/btnZPos"
-        app:layout_constraintVertical_bias="0.673" />
-
-
-
-
-    <Button
-        android:id="@+id/btnUp"
-        android:layout_width="79dp"
-        android:layout_height="64dp"
-        android:layout_marginBottom="164dp"
-        android:text="\u2191"
-
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.21"
-        app:layout_constraintStart_toStartOf="parent"
-        android:textSize="32dp"/>
-
-
-    <Button
-        android:id="@+id/btnLeft"
-        android:layout_width="79dp"
-        android:layout_height="64dp"
-        android:layout_marginBottom="100dp"
-        android:text="\u2190"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.088"
-        app:layout_constraintStart_toStartOf="parent"
-        android:textSize="32dp" />
-
-    <Button
-        android:id="@+id/btnDown"
-        android:layout_width="79dp"
-        android:layout_height="64dp"
-        android:layout_marginBottom="40dp"
-        android:text="\u2193"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.21"
-        app:layout_constraintStart_toStartOf="parent"
-        android:textSize="32dp"/>
-
-    <Button
-        android:id="@+id/btnRight"
-        android:layout_width="79dp"
-        android:layout_height="64dp"
-        android:layout_marginBottom="100dp"
-        android:text="\u2192"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.332"
-        app:layout_constraintStart_toStartOf="parent"
-        android:textSize="32dp"/>
-
     <TextView
         android:id="@+id/positionText"
         android:layout_width="wrap_content"
@@ -104,11 +21,11 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/arrowControlText"
+        android:id="@+id/sliderControlText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Arrow Control"
+        android:text="JoyStick Control"
         android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.499"

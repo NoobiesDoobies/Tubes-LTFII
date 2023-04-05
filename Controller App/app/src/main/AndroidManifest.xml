@@ -23,6 +23,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".SliderMode"
+            android:label="@string/app_name"
+            android:usesCleartextTraffic="true"
+            android:dataExtractionRules="@xml/data_extraction_rules"
+            android:theme="@style/Theme.ArmControllerApp">
+        </activity>
+        <activity
+            android:name=".JoyStickMode"
+            android:label="@string/app_name"
+            android:usesCleartextTraffic="true"
+            android:dataExtractionRules="@xml/data_extraction_rules"
+            android:theme="@style/Theme.ArmControllerApp">
+        </activity>
     </application>
 
 </manifest>

@@ -1,19 +1,14 @@
 package com.example.armcontrollerapp
 
-import android.content.Context
+import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Bundle
-import android.view.Window
-import android.widget.Button
-import android.widget.TextView
-import android.widget.Toast
+import android.view.View
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
+
 import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.IO
-import java.io.DataOutputStream
-import java.io.IOException
 import java.net.HttpURLConnection
 import java.net.URL
 
@@ -27,6 +22,7 @@ class MainActivity : AppCompatActivity() {
     private var zIncrement: Double = 0.3
 
     private var BASE_URL: String = "http://192.168.4.1"
+    private var mode: String = "Arrows"
 
     public suspend fun sendDataToESP(): Unit{
         val url = URL(BASE_URL + "/posts" + "?x=$x&y=$y&z=$z")
@@ -64,7 +60,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
 
-
         val btnLeft = findViewById<Button>(R.id.btnLeft)
         val btnRight = findViewById<Button>(R.id.btnRight)
         val btnUp = findViewById<Button>(R.id.btnUp)
@@ -76,8 +71,38 @@ class MainActivity : AppCompatActivity() {
         val xText = findViewById<TextView>(R.id.xText)
         val yText = findViewById<TextView>(R.id.yText)
         val zText = findViewById<TextView>(R.id.zText)
+        val spinner = findViewById<Spinner>(R.id.selectMode)
+        val modes = resources.getStringArray(R.array.mode)
+        var adapter: ArrayAdapter<CharSequence> = ArrayAdapter.createFromResource(this, R.array.mode, android.R.layout.simple_spinner_item)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_item)
 
+        spinner.setAdapter(adapter)
 
+        spinner.onItemSelectedListener = object :
+            AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>,
+                                        view: View, position: Int, id: Long) {
+                mode = modes[position]
+                Toast.makeText(this@MainActivity,
+                    getString(R.string.selected_mode) + " " +
+                            "" + mode, Toast.LENGTH_SHORT).show()
+                when(mode){
+                    "Slider" -> {
+                        val intent = Intent(this@MainActivity, SliderMode::class.java)
+                        startActivity(intent)
+                    }
+                    "JoyStick" ->{
+                        val intent = Intent(this@MainActivity, JoyStickMode::class.java)
+                        startActivity(intent)
+                    }
+                }
+
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                // write code to perform some action
+            }
+        }
 
         btnLeft.setOnClickListener{
             x-=xIncrement
