@@ -85,6 +85,7 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this@MainActivity,
                     getString(R.string.selected_mode) + " " +
                             "" + mode, Toast.LENGTH_SHORT).show()
+                println(mode)
                 when(mode){
                     "Slider" -> {
                         val intent = Intent(this@MainActivity, SliderMode::class.java)

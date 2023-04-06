@@ -17,14 +17,14 @@ import java.net.HttpURLConnection
 import java.net.URL
 
 class SliderMode : AppCompatActivity() {
-    var baseAngle: Double = 0.0
     var arm1Angle: Double = 0.0
     var arm2Angle: Double = 0.0
+    var endEffectorAngle: Double = 0.0
     private var BASE_URL: String = "http://192.168.4.1"
     var mode: String = "Slider"
     val TIME_OUT = 1000L
     public suspend fun sendDataToESP(): Unit{
-        val url = URL(String.format("%s/posts?mode=%s&base=%.2f&arm1=%.2f&arm2=%.2f", BASE_URL, mode, baseAngle, arm1Angle, arm2Angle))
+        val url = URL(String.format("%s/posts?mode=%s&arm1=%.2f&arm2=%.2f&endeffector=%.2f", BASE_URL, mode, arm1Angle, arm2Angle, endEffectorAngle))
         val job = withTimeoutOrNull(TIME_OUT){
             with(url.openConnection() as HttpURLConnection) {
                 requestMethod = "GET"  // optional default is GET
@@ -57,50 +57,53 @@ class SliderMode : AppCompatActivity() {
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
 
         val btnReset = findViewById<Button>(R.id.btnReset)
-        val Base = findViewById<Slider>(R.id.Base)
         val Arm1 = findViewById<Slider>(R.id.Arm1)
         val Arm2 = findViewById<Slider>(R.id.Arm2)
+        val EndEffector = findViewById<Slider>(R.id.EndEffector)
         val arm1Text = findViewById<TextView>(R.id.arm1Text)
         val arm2Text = findViewById<TextView>(R.id.arm2Text)
-        val baseText = findViewById<TextView>(R.id.baseText)
+        val endEffectorText = findViewById<TextView>(R.id.endEffectorText)
 
         btnReset.setOnClickListener{
-            baseAngle = 0.0
             arm1Angle = 0.0
             arm2Angle = 0.0
-            baseText.text = String.format("Base: %.1f", baseAngle)
+            endEffectorAngle = 0.0
             arm1Text.text = String.format("Arm1: %.1f", arm1Angle)
             arm2Text.text = String.format("Arm2: %.1f", arm2Angle)
-            alert("Calibrated successfully to (0,0,0)")
+            endEffectorText.text = String.format("End Effector: %.1f", endEffectorAngle)
+            alert("Reset successfully to (0,0,0)")
+            Arm1.value = arm1Angle.toFloat()
+            Arm2.value = arm2Angle.toFloat()
+            EndEffector.value = endEffectorAngle.toFloat()
             CoroutineScope(Dispatchers.IO).launch{
                 sendDataToESP()
             }
         }
 
-       Base.addOnChangeListener(object: Slider.OnChangeListener{
+       Arm1.addOnChangeListener(object: Slider.OnChangeListener{
            override fun onValueChange(slider: Slider, value: Float, fromUser: Boolean) {
-               baseAngle = slider.value.toDouble()
-               baseText.text = String.format("Base: %.1f", baseAngle)
+               arm1Angle = slider.value.toDouble()
+               arm1Text.text = String.format("Arm1: %.1f", arm1Angle)
                CoroutineScope(Dispatchers.IO).launch{
                    sendDataToESP()
                }
            }
        })
 
-        Arm1.addOnChangeListener(object: Slider.OnChangeListener{
+        Arm2.addOnChangeListener(object: Slider.OnChangeListener{
             override fun onValueChange(slider: Slider, value: Float, fromUser: Boolean) {
-                arm1Angle = slider.value.toDouble()
-                arm1Text.text = String.format("Arm1: %.1f", arm1Angle)
+                arm2Angle = slider.value.toDouble()
+                arm2Text.text = String.format("Arm2: %.1f", arm2Angle)
                 CoroutineScope(Dispatchers.IO).launch{
                     sendDataToESP()
                 }
             }
         })
 
-        Arm2.addOnChangeListener(object: Slider.OnChangeListener{
+        EndEffector.addOnChangeListener(object: Slider.OnChangeListener{
             override fun onValueChange(slider: Slider, value: Float, fromUser: Boolean) {
-                arm2Angle = slider.value.toDouble()
-                arm2Text.text = String.format("Arm2: %.1f", arm2Angle)
+                endEffectorAngle = slider.value.toDouble()
+                endEffectorText.text = String.format("End Effector: %.1f", endEffectorAngle)
                 CoroutineScope(Dispatchers.IO).launch{
                     sendDataToESP()
                 }
