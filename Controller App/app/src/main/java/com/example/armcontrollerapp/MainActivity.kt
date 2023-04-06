@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
     private var mode: String = "Arrows"
 
     public suspend fun sendDataToESP(): Unit{
-        val url = URL(BASE_URL + "/posts" + "?x=$x&y=$y&z=$z")
+        val url = URL(BASE_URL + "/posts" + "?mode=$mode&x=$x&y=$y&z=$z")
 
         val job = withTimeoutOrNull(TIME_OUT){
             with(url.openConnection() as HttpURLConnection) {
@@ -158,8 +158,6 @@ class MainActivity : AppCompatActivity() {
             x = 0.0
             y = 0.0
             z = 0.0
-
-            var positionString = String.format("%.1f %.1f %.1f\n", x, y, z)
             xText.text = String.format("x: %.1f", x)
             yText.text = String.format("y: %.1f", y)
             zText.text = String.format("z: %.1f", z)

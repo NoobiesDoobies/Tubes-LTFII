@@ -34,6 +34,19 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/baseText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="68dp"
+        android:text="Base: 0.0"
+        app:layout_constraintBottom_toTopOf="@+id/Base"
+        app:layout_constraintEnd_toEndOf="@+id/Base"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="@+id/Base"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
         android:id="@+id/xText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -75,11 +88,11 @@
         app:layout_constraintGuide_begin="157dp" />
 
     <Button
-        android:id="@+id/calibrate"
+        android:id="@+id/btnReset"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="68dp"
-        android:text="Calibrate"
+        android:text="Reset"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -93,11 +106,72 @@
         android:maxLines="1"
         android:padding="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/calibrate"
+        app:layout_constraintEnd_toEndOf="@+id/btnReset"
         app:layout_constraintHorizontal_bias="0.614"
-        app:layout_constraintStart_toStartOf="@+id/calibrate"
+        app:layout_constraintStart_toStartOf="@+id/btnReset"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.007" />
 
+    <com.google.android.material.slider.Slider
+        android:id="@+id/Base"
+        android:layout_width="427dp"
+        android:layout_height="46dp"
+        android:value="0.0"
+        android:valueFrom="-180.0"
+        android:valueTo="180.0"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.327"
+        tools:ignore="MissingConstraints" />
 
+    <com.google.android.material.slider.Slider
+        android:id="@+id/Arm1"
+        android:layout_width="427dp"
+        android:layout_height="46dp"
+        android:value="0.0"
+        android:valueFrom="-180.0"
+        android:valueTo="180.0"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.589"
+        tools:ignore="MissingConstraints" />
+
+    <com.google.android.material.slider.Slider
+        android:id="@+id/Arm2"
+        android:layout_width="427dp"
+        android:layout_height="46dp"
+        android:value="0.0"
+        android:valueFrom="-180.0"
+        android:valueTo="180.0"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.867"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/arm1Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Arm1: 0.0"
+        app:layout_constraintBottom_toTopOf="@+id/Arm1"
+        app:layout_constraintEnd_toEndOf="@+id/Arm1"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="@+id/Arm1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/arm2Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Arm2: 0.0"
+        app:layout_constraintBottom_toTopOf="@+id/Arm2"
+        app:layout_constraintEnd_toEndOf="@+id/Arm2"
+        app:layout_constraintStart_toStartOf="@+id/Arm2" />
 </androidx.constraintlayout.widget.ConstraintLayout>
