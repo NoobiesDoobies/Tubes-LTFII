@@ -24,8 +24,7 @@ class SliderMode : AppCompatActivity() {
     var mode: String = "Slider"
     val TIME_OUT = 1000L
     public suspend fun sendDataToESP(): Unit{
-        val url = URL(BASE_URL + "/posts" + "?mode=$mode&base=$baseAngle&arm1=$arm1Angle&arm2=$arm2Angle")
-
+        val url = URL(String.format("%s/posts?mode=%s&base=%.2f&arm1=%.2f&arm2=%.2f", BASE_URL, mode, baseAngle, arm1Angle, arm2Angle))
         val job = withTimeoutOrNull(TIME_OUT){
             with(url.openConnection() as HttpURLConnection) {
                 requestMethod = "GET"  // optional default is GET
@@ -114,6 +113,7 @@ class SliderMode : AppCompatActivity() {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_item)
 
         spinner.setAdapter(adapter)
+        spinner.setSelection(2)
 
         spinner.onItemSelectedListener = object :
             AdapterView.OnItemSelectedListener {
@@ -124,12 +124,12 @@ class SliderMode : AppCompatActivity() {
                     getString(R.string.selected_mode) + " " +
                             "" + mode, Toast.LENGTH_SHORT).show()
                 when(mode){
-                    "Slider" -> {
-                        val intent = Intent(this@SliderMode, SliderMode::class.java)
+                    "JoyStick" -> {
+                        val intent = Intent(this@SliderMode, JoyStickMode::class.java)
                         startActivity(intent)
                     }
-                    "JoyStick" ->{
-                        val intent = Intent(this@SliderMode, JoyStickMode::class.java)
+                    "Arrows" ->{
+                        val intent = Intent(this@SliderMode, MainActivity::class.java)
                         startActivity(intent)
                     }
                 }
@@ -137,7 +137,7 @@ class SliderMode : AppCompatActivity() {
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {
-                // write code to perform some action
+                startActivity(intent)
             }
         }
 

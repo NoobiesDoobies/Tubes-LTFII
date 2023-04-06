@@ -25,8 +25,7 @@ class MainActivity : AppCompatActivity() {
     private var mode: String = "Arrows"
 
     public suspend fun sendDataToESP(): Unit{
-        val url = URL(BASE_URL + "/posts" + "?mode=$mode&x=$x&y=$y&z=$z")
-
+        val url = URL(String.format("%s/posts?mode=%s&x=%.2f&y=%.2f&z=%.2f", BASE_URL, mode, x, y, z))
         val job = withTimeoutOrNull(TIME_OUT){
             with(url.openConnection() as HttpURLConnection) {
                 requestMethod = "GET"  // optional default is GET

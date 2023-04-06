@@ -22,7 +22,7 @@ import kotlin.math.cos
 import kotlin.math.sin
 
 class JoyStickMode : AppCompatActivity(), JoyStick.JoyStickListener {
-    val DELAY_MS: Long = 10
+    val DELAY_MS: Long = 50
     val TIME_OUT = 1000L
     val SCALE_DOWN: Double = 0.001
     var x: Double = 0.0
@@ -35,6 +35,8 @@ class JoyStickMode : AppCompatActivity(), JoyStick.JoyStickListener {
     private var mode: String = "JoyStick"
     private val handler = Handler()
     private var runnable: Runnable? = null
+
+
     public fun updatePositionUI(): Unit{
         runnable = object : Runnable {
 
@@ -47,15 +49,23 @@ class JoyStickMode : AppCompatActivity(), JoyStick.JoyStickListener {
 
                 xText.text = String.format("x: %.1f", x)
                 yText.text = String.format("y: %.1f", y)
+
+                CoroutineScope(IO).launch{
+                    sendDataToESP()
+                }
                 // Schedule the task to run again after a delay
                 handler.postDelayed(this, DELAY_MS)
             }
         }
+
         handler.post(runnable!!)
     }
-    public suspend fun sendDataToESP(): Unit{
-        val url = URL(BASE_URL + "/posts" + "?mode=$mode&x=$x&y=$y&z=$z")
 
+
+    public suspend fun sendDataToESP(): Unit{
+//        val url = URL(BASE_URL + "/posts" + "?mode=JoyStick&x=$x&y=$y&z=$z")
+        val url =URL(String.format("%s/posts?mode=JoyStick&x=%.2f&y=%.2f&z=%.2f", BASE_URL, x, y, z))
+        println(url)
         val job = withTimeoutOrNull(TIME_OUT){
             with(url.openConnection() as HttpURLConnection) {
                 requestMethod = "GET"  // optional default is GET
@@ -94,18 +104,12 @@ class JoyStickMode : AppCompatActivity(), JoyStick.JoyStickListener {
         btnZPos.setOnClickListener{
             z += zIncrement
             zText.text = String.format("z: %.1f", z)
-            CoroutineScope(IO).launch{
-                sendDataToESP()
-            }
 
         }
 
         btnZNeg.setOnClickListener{
             z -= zIncrement
             zText.text = String.format("z: %.1f", z)
-            CoroutineScope(IO).launch{
-                sendDataToESP()
-            }
         }
 
         val spinner = findViewById<Spinner>(R.id.selectMode)
@@ -113,24 +117,41 @@ class JoyStickMode : AppCompatActivity(), JoyStick.JoyStickListener {
         var adapter: ArrayAdapter<CharSequence> = ArrayAdapter.createFromResource(this, R.array.mode, android.R.layout.simple_spinner_item)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_item)
 
+
         spinner.setAdapter(adapter)
+        spinner.setSelection(1)
 
         spinner.onItemSelectedListener = object :
+
+
             AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>,
                                         view: View, position: Int, id: Long) {
+
                 mode = modes[position]
+
                 Toast.makeText(this@JoyStickMode,
                     getString(R.string.selected_mode) + " " +
                             "" + mode, Toast.LENGTH_SHORT).show()
                 when(mode){
                     "Slider" -> {
+                        if (runnable != null) {
+                            handler.removeCallbacks(runnable!!)
+                            runnable = null
+                        }
                         val intent = Intent(this@JoyStickMode, SliderMode::class.java)
                         startActivity(intent)
                     }
-                    "JoyStick" ->{
-                        val intent = Intent(this@JoyStickMode, JoyStickMode::class.java)
+                    "Arrows" ->{
+                        if (runnable != null) {
+                            handler.removeCallbacks(runnable!!)
+                            runnable = null
+                        }
+                        val intent = Intent(this@JoyStickMode, MainActivity::class.java)
                         startActivity(intent)
+                    }
+                    "JoyStick"->{
+                        println("OK")
                     }
                 }
 
@@ -143,14 +164,12 @@ class JoyStickMode : AppCompatActivity(), JoyStick.JoyStickListener {
     }
 
     override fun onMove(joyStick: JoyStick?, angle: Double, power: Double, direction: Int) {
-        println(String.format("Angle: $angle\tPower: $power"))
+//        println(String.format("Angle: $angle\tPower: $power"))
 
         joystickAngle = angle
         joystickPower = power
 
-        CoroutineScope(IO).launch{
-            sendDataToESP()
-        }
+
     }
 
     override fun onTap() {
