@@ -1,6 +1,7 @@
 package com.example.armcontrollerapp;
 
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import android.net.sip.SipErrorCode.TIME_OUT
 import android.os.Bundle
 import android.view.View
@@ -54,6 +55,7 @@ class SliderMode : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.slider_layout)
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
 
         val btnReset = findViewById<Button>(R.id.btnReset)
         val Base = findViewById<Slider>(R.id.Base)

@@ -5,15 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e6697157-8d7e-4782-8ebf-8acd140ed057" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/kotlinktor/data/remote/dto/PostResponse.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ktorClientAndroid/app/src/main/res/layout/activity_main.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ESP_Asyncwebserver/02_SPIFFS.ino" beforeDir="false" afterPath="$PROJECT_DIR$/ESP_Asyncwebserver/02_SPIFFS.ino" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ESP_Asyncwebserver/99_main.ino" beforeDir="false" afterPath="$PROJECT_DIR$/ESP_Asyncwebserver/99_main.ino" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kotlin/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/Kotlin/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kotlin/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Kotlin/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kotlin/app/src/main/java/com/example/bluetooth_template_ltf/SpinnerActivity.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kotlin/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/Kotlin/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controller App/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/Controller App/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controller App/app/src/main/res/layout/joystick_layout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Controller App/app/src/main/res/layout/joystick_layout.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,7 +31,8 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.cidr.known.project.marker": "true",
-    "cidr.known.project.marker": "true"
+    "cidr.known.project.marker": "true",
+    "last_opened_file_path": "C:/Users/ASUS/Desktop/Tubes-LTFII/Controller App"
   }
 }]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />

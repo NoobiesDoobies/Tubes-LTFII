@@ -16,12 +16,20 @@ import java.io.DataOutputStream
 import java.io.IOException
 import java.net.HttpURLConnection
 import java.net.URL
+import com.erz.joysticklibrary.JoyStick;
 
-class JoyStickMode : AppCompatActivity() {
+class JoyStickMode : AppCompatActivity(), JoyStick.JoyStickListener {
     var mode: String = "JoyStick"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.joystick_layout)
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+        val joystick = findViewById<JoyStick>(R.id.Joystick)
+
+        joystick.setListener(this)
+//        joystick.enableStayPut(true);
+
 
         val spinner = findViewById<Spinner>(R.id.selectMode)
         val modes = resources.getStringArray(R.array.mode)
@@ -55,5 +63,17 @@ class JoyStickMode : AppCompatActivity() {
                 // write code to perform some action
             }
         }
+    }
+
+    override fun onMove(joyStick: JoyStick?, angle: Double, power: Double, direction: Int) {
+        println(String.format("Angle: $angle\tPower: $power"))
+    }
+
+    override fun onTap() {
+        println("nothing")
+    }
+
+    override fun onDoubleTap() {
+        println("nothing")
     }
 }
