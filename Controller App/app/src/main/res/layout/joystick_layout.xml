@@ -22,7 +22,7 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
-        android:id="@+id/btnZNeg2"
+        android:id="@+id/btnZNeg"
         android:layout_width="79dp"
         android:layout_height="64dp"
         android:layout_marginEnd="56dp"
