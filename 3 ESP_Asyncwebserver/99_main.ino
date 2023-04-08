@@ -1,20 +1,21 @@
+#include <ArduinoJson.h>
 #include <HardwareSerial.h>
 #include <Arduino.h>
-#include <ArduinoJson.h>
 
 
+int timer = 0;
 void setup() {
   Serial.begin(115200);
-  initWiFi();
+  initWiFi(); 
     server.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
-      Serial.println("GETTING /");
-      AsyncResponseStream *response = request->beginResponseStream("application/json");
-      DynamicJsonDocument json(1024);
-      json["status"] = "ok";
-      json["ssid"] = WiFi.SSID();
-      json["ip"] = WiFi.softAPIP().toString();
-      serializeJson(json, *response);
-      request->send(response);
+        Serial.println("GETTING /");
+        AsyncResponseStream *response = request->beginResponseStream("application/json");
+        DynamicJsonDocument json(1024);
+        json["status"] = "ok";
+        json["ssid"] = WiFi.SSID();
+        json["ip"] = WiFi.softAPIP().toString();
+        serializeJson(json, *response);
+        request->send(response);
     });
    server.on("/posts", HTTP_GET, [](AsyncWebServerRequest *request){
       Serial.println("GETTING");
@@ -32,25 +33,45 @@ void setup() {
      
          Serial.println("------");
       }
-      
-      AsyncResponseStream *response = request->beginResponseStream("application/json");
-      DynamicJsonDocument json(1024);
-      json["status"] = "ok";
-      json["ssid"] = WiFi.SSID();
-      json["ip"] = WiFi.softAPIP().toString();
-      serializeJson(json, *response);
-      request->send(response);
-   });
-   server.on("/posts", HTTP_POST, [](AsyncWebServerRequest *request){  
-      Serial.println("ACTION!");
-      
+
       int params = request->params();
       for (int i = 0; i < params; i++)
       {
         AsyncWebParameter* p = request->getParam(i);
         Serial.printf("POST[%s]: %s\n", p->name().c_str(), p->value().c_str());
       }
-      
+
+      AsyncWebParameter* p = request->getParam(0);
+      const char *mode = p->value().c_str();
+      switch(mode[0]){
+        case 'A':
+          p = request->getParam(1);
+          x = p->value().toFloat();
+          p = request->getParam(2);
+          y = p->value().toFloat();
+          p = request->getParam(3);
+          z = p->value().toFloat();
+        case 'J':
+          p = request->getParam(1);
+          x = p->value().toFloat();
+          p = request->getParam(2);
+          y = p->value().toFloat();
+          p = request->getParam(3);
+          z = p->value().toFloat();
+        case 'S':
+          p = request->getParam(1);
+          arm1Angle = p->value().toFloat();
+          p = request->getParam(2);
+          arm2Angle = p->value().toFloat();
+          p = request->getParam(3);
+          endEffectorAngle = p->value().toFloat();
+      }
+        if(mode[0] == 'S'){
+          Serial.println("Arm1: " + String(arm1Angle) + "\tArm2: " + String(arm2Angle) + "\End Effector: " + String(endEffectorAngle));
+        }
+        else{
+          Serial.println("x: " + String(x) + "\ty: " + String(y) + "\tz: " + String(z));
+        }
       
       AsyncResponseStream *response = request->beginResponseStream("application/json");
       DynamicJsonDocument json(1024);
@@ -60,9 +81,6 @@ void setup() {
       serializeJson(json, *response);
       request->send(response);
    });
-   
-
-//  server.serveStatic("/", SPIFFS, "/");
 
   events.onConnect([](AsyncEventSourceClient *client){
     if(client->lastId()){
@@ -80,6 +98,8 @@ void setup() {
 
 
 void loop() {
-  updatePositionXY();
-//  Serial.println("x: " + String(x) + "\ty: " + String(y));
+  if((millis() - timer) > 100){
+    calculate_IK(x, y, z);
+    moveActuator();
+  }
 }

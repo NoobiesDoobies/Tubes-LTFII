@@ -33,7 +33,7 @@ class JoyStickMode : AppCompatActivity(), JoyStick.JoyStickListener {
     var joystickPower: Double = 0.0
     private var BASE_URL: String = "http://192.168.4.1"
     private var mode: String = "JoyStick"
-    private val handler = Handler()
+        private val handler = Handler()
     private var runnable: Runnable? = null
 
 
@@ -60,7 +60,10 @@ class JoyStickMode : AppCompatActivity(), JoyStick.JoyStickListener {
 
         handler.post(runnable!!)
     }
-
+    fun alert(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT)
+            .show()
+    }
 
     public suspend fun sendDataToESP(): Unit{
 //        val url = URL(BASE_URL + "/posts" + "?mode=JoyStick&x=$x&y=$y&z=$z")
@@ -95,6 +98,7 @@ class JoyStickMode : AppCompatActivity(), JoyStick.JoyStickListener {
         val joystick = findViewById<JoyStick>(R.id.Joystick)
         val btnZPos = findViewById<Button>(R.id.btnZPos)
         val btnZNeg = findViewById<Button>(R.id.btnZNeg)
+        val btnCalibrate = findViewById<Button>(R.id.calibrate)
         val xText = findViewById<TextView>(R.id.xText)
         val yText = findViewById<TextView>(R.id.yText)
         val zText = findViewById<TextView>(R.id.zText)
@@ -110,6 +114,16 @@ class JoyStickMode : AppCompatActivity(), JoyStick.JoyStickListener {
         btnZNeg.setOnClickListener{
             z -= zIncrement
             zText.text = String.format("z: %.1f", z)
+        }
+
+        btnCalibrate.setOnClickListener{
+            x = 0.0
+            y = 0.0
+            z = 0.0
+            xText.text = String.format("x: %.1f", x)
+            yText.text = String.format("y: %.1f", y)
+            zText.text = String.format("z: %.1f", z)
+            alert("Calibrated successfully to (0,0,0)")
         }
 
         val spinner = findViewById<Spinner>(R.id.selectMode)
@@ -150,9 +164,6 @@ class JoyStickMode : AppCompatActivity(), JoyStick.JoyStickListener {
                         val intent = Intent(this@JoyStickMode, MainActivity::class.java)
                         startActivity(intent)
                     }
-                    "JoyStick"->{
-                        println("OK")
-                    }
                 }
 
             }
@@ -165,11 +176,8 @@ class JoyStickMode : AppCompatActivity(), JoyStick.JoyStickListener {
 
     override fun onMove(joyStick: JoyStick?, angle: Double, power: Double, direction: Int) {
 //        println(String.format("Angle: $angle\tPower: $power"))
-
         joystickAngle = angle
         joystickPower = power
-
-
     }
 
     override fun onTap() {
@@ -179,4 +187,6 @@ class JoyStickMode : AppCompatActivity(), JoyStick.JoyStickListener {
     override fun onDoubleTap() {
         println("nothing")
     }
+
+
 }
