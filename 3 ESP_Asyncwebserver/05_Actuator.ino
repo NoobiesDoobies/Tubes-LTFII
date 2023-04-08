@@ -1,5 +1,5 @@
 #include <TFScope22.h>
-#include <Stepper.h>
+#include <AccelStepper.h>
 #include <Servo.h>
 
 #define SUDUT_MIN 0
@@ -19,15 +19,17 @@ const int STEPPER_PIN_3 = DO2;
 const int STEPPER_PIN_4 = DO3;
 
 Servo EndEffector;
-Stepper Arm1(stepsPerRevolution, STEPPER_PIN_1, STEPPER_PIN_3, STEPPER_PIN_2, STEPPER_PIN_4);
-
+//Stepper Arm1(stepsPerRevolution, STEPPER_PIN_1, STEPPER_PIN_3, STEPPER_PIN_2, STEPPER_PIN_4);
+AccelStepper Arm1(AccelStepper::FULL4WIRE, STEPPER_PIN_1, STEPPER_PIN_3, STEPPER_PIN_2, STEPPER_PIN_4);
 
 void initActuator(){
   // set servo pin as output
   pinMode(SERVO_PIN, OUTPUT);
   // attach servo to pin
   EndEffector.attach(SERVO_PIN);
-  Arm1.setSpeed(15);
+//  Arm1.setSpeed(15);
+  Arm1.setMaxSpeed(8000);
+  Arm1.setAcceleration(20000);
   Serial.println("Servo and Stepper is ready");
 }
 
@@ -50,12 +52,33 @@ void initActuator(){
 //}
 
 void moveActuator(){
-  Serial.print("Moving Actuator to: ");
-  Serial.println("End Effector: " + String(endEffectorAngle));
+//  Serial.print("Moving Actuator to: ");
+  
   //move all actuator to the desired angle
   EndEffector.write(endEffectorAngle);
-  float deltaArm1 = arm1Angle - arm1CurrentAngle;
-  int arm1Pos = map(deltaArm1, 0, 180, 0, stepsPerRevolution);
-  Arm1.step(arm1Pos);
-  arm1CurrentAngle = arm1Angle; 
+//  float deltaArm1 = arm1Angle - arm1CurrentAngle;
+  int arm1Step = map(arm1Angle+180, 0, 360, 0, stepsPerRevolution);
+  if(arm1CurrentAngle != arm1Angle){
+    Serial.println("Setting MOVETO");
+    Arm1.moveTo(arm1Step);
+    Arm1.run(); 
+    arm1CurrentAngle = arm1Angle;
+  }
+//  Serial.println("End Effector: " + String(endEffectorAngle) + "\tArm1: " + String(arm1Angle)");
+  Serial.println("Speed1: " + String(Arm1.speed()) + "\tPos1: " + String(Arm1.currentPosition()) + "\tTarget1: " + String(arm1Step));
+
+  /* Stepper.h library */
+//  Arm1.step(arm1Pos);
+
+  /* AccelStepper.h library */
+
+
+  // not blocking but bad
+  Arm1.run(); 
+  
+  
+  // blocking but very smooth
+//  Arm1.runToNewPosition(arm1Step);
+  
+
 }

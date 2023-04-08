@@ -99,9 +99,10 @@ void setup() {
 
 
 void loop() {
-  if((millis() - timer) > 100){
-//    calculate_IK(x, y, z);
-    moveActuator();
-    timer = millis();
-  }
+//  if((millis() - timer) > 100){
+////    calculate_IK(x, y, z);
+//    moveActuator();
+//    timer = millis();
+//  }
+  moveActuator();
 }
