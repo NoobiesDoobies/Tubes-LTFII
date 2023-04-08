@@ -7,6 +7,7 @@ int timer = 0;
 void setup() {
   Serial.begin(115200);
   initWiFi(); 
+  initActuator();
     server.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
         Serial.println("GETTING /");
         AsyncResponseStream *response = request->beginResponseStream("application/json");
@@ -19,27 +20,27 @@ void setup() {
     });
    server.on("/posts", HTTP_GET, [](AsyncWebServerRequest *request){
       Serial.println("GETTING");
-      int paramsNr = request->params();
-      Serial.println(paramsNr);
-      for(int i=0;i<paramsNr;i++){
- 
-         AsyncWebParameter* p = request->getParam(i);
-     
-         Serial.print("Param name: ");
-         Serial.println(p->name());
-     
-         Serial.print("Param value: ");
-         Serial.println(p->value());
-     
-         Serial.println("------");
-      }
+//      int paramsNr = request->params();
+//      Serial.println(paramsNr);
+//      for(int i=0;i<paramsNr;i++){
+// 
+//         AsyncWebParameter* p = request->getParam(i);
+//     
+//         Serial.print("Param name: ");
+//         Serial.println(p->name());
+//     
+//         Serial.print("Param value: ");
+//         Serial.println(p->value());
+//     
+//         Serial.println("------");
+//      }
 
-      int params = request->params();
-      for (int i = 0; i < params; i++)
-      {
-        AsyncWebParameter* p = request->getParam(i);
-        Serial.printf("POST[%s]: %s\n", p->name().c_str(), p->value().c_str());
-      }
+//      int params = request->params();
+//      for (int i = 0; i < params; i++)
+//      {
+//        AsyncWebParameter* p = request->getParam(i);
+//        Serial.printf("POST[%s]: %s\n", p->name().c_str(), p->value().c_str());
+//      }
 
       AsyncWebParameter* p = request->getParam(0);
       const char *mode = p->value().c_str();
@@ -67,7 +68,7 @@ void setup() {
           endEffectorAngle = p->value().toFloat();
       }
         if(mode[0] == 'S'){
-          Serial.println("Arm1: " + String(arm1Angle) + "\tArm2: " + String(arm2Angle) + "\End Effector: " + String(endEffectorAngle));
+          Serial.println("Arm1: " + String(arm1Angle) + "\tArm2: " + String(arm2Angle) + "\tEnd Effector: " + String(endEffectorAngle));
         }
         else{
           Serial.println("x: " + String(x) + "\ty: " + String(y) + "\tz: " + String(z));
@@ -99,7 +100,8 @@ void setup() {
 
 void loop() {
   if((millis() - timer) > 100){
-    calculate_IK(x, y, z);
+//    calculate_IK(x, y, z);
     moveActuator();
+    timer = millis();
   }
 }
