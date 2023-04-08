@@ -5,10 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e6697157-8d7e-4782-8ebf-8acd140ed057" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controller App/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/Controller App/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controller App/app/src/main/res/layout/joystick_layout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Controller App/app/src/main/res/layout/joystick_layout.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,7 +29,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.cidr.known.project.marker": "true",
     "cidr.known.project.marker": "true",
-    "last_opened_file_path": "C:/Users/ASUS/Desktop/Tubes-LTFII/Controller App"
+    "last_opened_file_path": "C:/Users/ASUS/Desktop/Tubes-LTFII"
   }
 }]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
