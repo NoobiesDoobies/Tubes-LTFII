@@ -485,19 +485,19 @@ $SKPOLY
   9
 $TDCREATE
  40
-2460045.97768838
+2460046.441234722
   9
 $TDUCREATE
  40
-2460045.686021713
+2460046.149568056
   9
 $TDUPDATE
  40
-2460045.977726528
+2460046.441274988
   9
 $TDUUPDATE
  40
-2460045.686059861
+2460046.149608322
   9
 $TDINDWG
  40
@@ -545,7 +545,7 @@ $SPLINESEGS
   9
 $HANDSEED
   5
-9B
+9F
   9
 $SURFTAB1
  70
@@ -925,7 +925,7 @@ $PSTYLEMODE
   9
 $FINGERPRINTGUID
   2
-{84abc5c5-b529-43cc-85c6-20a46ca1fc37}
+{5b2f3b46-b0d8-4bfd-b0ff-7a819341c49e}
   9
 $VERSIONGUID
   2
@@ -1739,7 +1739,7 @@ txt
   0
 STYLE
   5
-8C
+90
 330
 3
 100
@@ -1823,7 +1823,7 @@ ACAD
   0
 APPID
   5
-93
+97
 330
 9
 100
@@ -2349,7 +2349,33 @@ AcDbCircle
  40
 1.499999999999995
   0
-LINE
+CIRCLE
+  5
+83
+330
+1F
+100
+AcDbEntity
+  8
+0
+  6
+Continuous
+ 62
+     7
+370
+    25
+100
+AcDbCircle
+ 10
+66.5
+ 20
+-9.3076379767
+ 30
+0.0
+ 40
+1.499999999999811
+  0
+CIRCLE
   5
 84
 330
@@ -2365,21 +2391,17 @@ Continuous
 370
     25
 100
-AcDbLine
+AcDbCircle
  10
--100.0
+66.5
  20
-22.5
+19.6923620233
  30
 0.0
- 11
--100.0
- 21
--12.5
- 31
-0.0
+ 40
+1.499999999999996
   0
-LINE
+CIRCLE
   5
 85
 330
@@ -2395,21 +2417,17 @@ Continuous
 370
     25
 100
-AcDbLine
+AcDbCircle
  10
--100.0
+28.5
  20
-22.5
+19.6923620233
  30
 0.0
- 11
-82.5
- 21
-22.5
- 31
-0.0
+ 40
+1.500000000000004
   0
-LINE
+CIRCLE
   5
 86
 330
@@ -2425,49 +2443,15 @@ Continuous
 370
     25
 100
-AcDbLine
+AcDbCircle
  10
--61.5
+28.5
  20
--12.5
+-9.3076379767
  30
 0.0
- 11
-82.5
- 21
--12.5
- 31
-0.0
-  0
-LINE
-  5
-87
-330
-1F
-100
-AcDbEntity
-  8
-0
-  6
-Continuous
- 62
-     7
-370
-    25
-100
-AcDbLine
- 10
--61.5
- 20
--12.5
- 30
-0.0
- 11
--61.5
- 21
--3.5
- 31
-0.0
+ 40
+1.499999999999996
   0
 LINE
   5
@@ -2487,15 +2471,15 @@ Continuous
 100
 AcDbLine
  10
--94.0
+-100.0
  20
--3.5
+22.5
  30
 0.0
  11
--61.5
+-100.0
  21
--3.5
+-12.5
  31
 0.0
   0
@@ -2517,15 +2501,15 @@ Continuous
 100
 AcDbLine
  10
--94.0
+82.5
  20
--12.5
+22.5
  30
 0.0
  11
--94.0
+82.5
  21
--3.5
+-12.5
  31
 0.0
   0
@@ -2547,13 +2531,13 @@ Continuous
 100
 AcDbLine
  10
--100.0
+-61.5
  20
 -12.5
  30
 0.0
  11
--94.0
+82.5
  21
 -12.5
  31
@@ -2577,7 +2561,127 @@ Continuous
 100
 AcDbLine
  10
-82.5
+-61.5
+ 20
+-12.5
+ 30
+0.0
+ 11
+-61.5
+ 21
+-3.5
+ 31
+0.0
+  0
+LINE
+  5
+8C
+330
+1F
+100
+AcDbEntity
+  8
+0
+  6
+Continuous
+ 62
+     7
+370
+    25
+100
+AcDbLine
+ 10
+-94.0
+ 20
+-3.5
+ 30
+0.0
+ 11
+-61.5
+ 21
+-3.5
+ 31
+0.0
+  0
+LINE
+  5
+8D
+330
+1F
+100
+AcDbEntity
+  8
+0
+  6
+Continuous
+ 62
+     7
+370
+    25
+100
+AcDbLine
+ 10
+-94.0
+ 20
+-12.5
+ 30
+0.0
+ 11
+-94.0
+ 21
+-3.5
+ 31
+0.0
+  0
+LINE
+  5
+8E
+330
+1F
+100
+AcDbEntity
+  8
+0
+  6
+Continuous
+ 62
+     7
+370
+    25
+100
+AcDbLine
+ 10
+-100.0
+ 20
+-12.5
+ 30
+0.0
+ 11
+-94.0
+ 21
+-12.5
+ 31
+0.0
+  0
+LINE
+  5
+8F
+330
+1F
+100
+AcDbEntity
+  8
+0
+  6
+Continuous
+ 62
+     7
+370
+    25
+100
+AcDbLine
+ 10
+-100.0
  20
 22.5
  30
@@ -2585,13 +2689,13 @@ AcDbLine
  11
 82.5
  21
--12.5
+22.5
  31
 0.0
   0
 MTEXT
   5
-8D
+91
 330
 1F
 100
@@ -2631,7 +2735,7 @@ SLDTEXTSTYLE0
   0
 MTEXT
   5
-8E
+92
 330
 1F
 100
@@ -2687,7 +2791,7 @@ AcDbDictionary
   3
 ACAD_DETAILVIEWSTYLE
 350
-97
+9B
   3
 ACAD_GROUP
 350
@@ -2723,7 +2827,7 @@ ACAD_SCALELIST
   3
 ACAD_SECTIONVIEWSTYLE
 350
-98
+9C
   3
 ACAD_TABLESTYLE
 350
@@ -2735,11 +2839,11 @@ ACAD_VISUALSTYLE
   3
 ACDB_RECOMPOSE_DATA
 350
-94
+98
   3
 AcDbVariableDictionary
 350
-8F
+93
   0
 SUN
   5
@@ -2775,7 +2879,7 @@ AcDbSun
   0
 DICTIONARY
   5
-97
+9B
 102
 {ACAD_REACTORS
 330
@@ -3091,7 +3195,7 @@ D2
   0
 DICTIONARY
   5
-98
+9C
 102
 {ACAD_REACTORS
 330
@@ -3239,7 +3343,7 @@ X-Ray
   0
 XRECORD
   5
-94
+98
 102
 {ACAD_REACTORS
 330
@@ -3259,7 +3363,7 @@ AcDbXrecord
   0
 DICTIONARY
   5
-8F
+93
 102
 {ACAD_REACTORS
 330
@@ -3275,23 +3379,23 @@ AcDbDictionary
   3
 CANNOSCALE
 350
-90
+94
   3
 CENTEREXE
 350
-99
+9D
   3
 CENTERLTYPEFILE
 350
-9A
+9E
   3
 CMLEADERSTYLE
 350
-96
+9A
   3
 CTABLESTYLE
 350
-95
+99
   0
 LAYOUT
   5
@@ -4707,7 +4811,7 @@ TABLESTYLE
 102
 {ACAD_XDICTIONARY
 360
-91
+95
 102
 }
 330
@@ -6913,15 +7017,15 @@ X-Ray
   0
 DICTIONARYVAR
   5
-90
+94
 102
 {ACAD_REACTORS
 330
-8F
+93
 102
 }
 330
-8F
+93
 100
 DictionaryVariables
 280
@@ -6931,15 +7035,15 @@ DictionaryVariables
   0
 DICTIONARYVAR
   5
-99
+9D
 102
 {ACAD_REACTORS
 330
-8F
+93
 102
 }
 330
-8F
+93
 100
 DictionaryVariables
 280
@@ -6949,15 +7053,15 @@ DictionaryVariables
   0
 DICTIONARYVAR
   5
-9A
+9E
 102
 {ACAD_REACTORS
 330
-8F
+93
 102
 }
 330
-8F
+93
 100
 DictionaryVariables
 280
@@ -6967,15 +7071,15 @@ acadiso.lin
   0
 DICTIONARYVAR
   5
-96
+9A
 102
 {ACAD_REACTORS
 330
-8F
+93
 102
 }
 330
-8F
+93
 100
 DictionaryVariables
 280
@@ -6985,15 +7089,15 @@ Standard
   0
 DICTIONARYVAR
   5
-95
+99
 102
 {ACAD_REACTORS
 330
-8F
+93
 102
 }
 330
-8F
+93
 100
 DictionaryVariables
 280
@@ -7003,7 +7107,7 @@ Standard
   0
 DICTIONARY
   5
-91
+95
 330
 6A
 100
@@ -7015,19 +7119,19 @@ AcDbDictionary
   3
 ACAD_ROUNDTRIP_2008_TABLESTYLE_CELLSTYLEMAP
 360
-92
+96
   0
 CELLSTYLEMAP
   5
-92
+96
 102
 {ACAD_REACTORS
 330
-91
+95
 102
 }
 330
-91
+95
 100
 AcDbCellStyleMap
  90
