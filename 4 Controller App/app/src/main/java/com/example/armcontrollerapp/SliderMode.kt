@@ -20,11 +20,13 @@ class SliderMode : AppCompatActivity() {
     var arm1Angle: Double = 0.0
     var arm2Angle: Double = 0.0
     var endEffectorAngle: Double = 0.0
+    var calibrate: Int = 0
     private var BASE_URL: String = "http://192.168.4.1"
     var mode: String = "Slider"
     val TIME_OUT = 1000L
     public suspend fun sendDataToESP(): Unit{
-        val url = URL(String.format("%s/posts?mode=%s&arm1=%.2f&arm2=%.2f&endeffector=%.2f", BASE_URL, mode, arm1Angle, arm2Angle, endEffectorAngle))
+        val url = URL(String.format("%s/posts?mode=%s&arm1=%.2f&arm2=%.2f&endeffector=%.2f&calibrate=%d", BASE_URL, mode, arm1Angle, arm2Angle, endEffectorAngle, calibrate))
+        calibrate = 0
         val job = withTimeoutOrNull(TIME_OUT){
             with(url.openConnection() as HttpURLConnection) {
                 requestMethod = "GET"  // optional default is GET
@@ -75,6 +77,7 @@ class SliderMode : AppCompatActivity() {
             Arm1.value = arm1Angle.toFloat()
             Arm2.value = arm2Angle.toFloat()
             EndEffector.value = endEffectorAngle.toFloat()
+            calibrate = 1
             CoroutineScope(Dispatchers.IO).launch{
                 sendDataToESP()
             }

@@ -13,7 +13,7 @@ import java.net.HttpURLConnection
 import java.net.URL
 
 class MainActivity : AppCompatActivity() {
-    val TIME_OUT = 1000L
+    val TIME_OUT = 1500L
     private var x: Double = 0.0
     private var y: Double = 0.0
     private var z: Double = 0.0

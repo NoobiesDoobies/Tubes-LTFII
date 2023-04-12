@@ -4,9 +4,14 @@
 
 
 int timer = 0;
+int calibrate = 0;
 void setup() {
   Serial.begin(115200);
+
   initWiFi(); 
+
+
+
   initActuator();
     server.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
         Serial.println("GETTING /");
@@ -20,27 +25,27 @@ void setup() {
     });
    server.on("/posts", HTTP_GET, [](AsyncWebServerRequest *request){
       Serial.println("GETTING");
-//      int paramsNr = request->params();
-//      Serial.println(paramsNr);
-//      for(int i=0;i<paramsNr;i++){
-// 
-//         AsyncWebParameter* p = request->getParam(i);
-//     
-//         Serial.print("Param name: ");
-//         Serial.println(p->name());
-//     
-//         Serial.print("Param value: ");
-//         Serial.println(p->value());
-//     
-//         Serial.println("------");
-//      }
+      int paramsNr = request->params();
+      Serial.println(paramsNr);
+      for(int i=0;i<paramsNr;i++){
+ 
+         AsyncWebParameter* p = request->getParam(i);
+     
+         Serial.print("Param name: ");
+         Serial.println(p->name());
+     
+         Serial.print("Param value: ");
+         Serial.println(p->value());
+     
+         Serial.println("------");
+      }
 
-//      int params = request->params();
-//      for (int i = 0; i < params; i++)
-//      {
-//        AsyncWebParameter* p = request->getParam(i);
-//        Serial.printf("POST[%s]: %s\n", p->name().c_str(), p->value().c_str());
-//      }
+      int params = request->params();
+      for (int i = 0; i < params; i++)
+      {
+        AsyncWebParameter* p = request->getParam(i);
+        Serial.printf("POST[%s]: %s\n", p->name().c_str(), p->value().c_str());
+      }
 
       AsyncWebParameter* p = request->getParam(0);
       const char *mode = p->value().c_str();
@@ -66,16 +71,24 @@ void setup() {
           arm2Angle = p->value().toFloat();
           p = request->getParam(3);
           endEffectorAngle = p->value().toFloat();
+          p = request->getParam(4);
+          calibrate = p->value().toInt();
       }
+      Serial.println("MODE[0] = " + String(mode[0]));
         if(mode[0] == 'S'){
-          Serial.println("Arm1: " + String(arm1Angle) + "\tArm2: " + String(arm2Angle) + "\tEnd Effector: " + String(endEffectorAngle));
+//          Serial.println("Arm1: " + String(arm1Angle) + "\tArm2: " + String(arm2Angle) + "\tEnd Effector: " + String(endEffectorAngle) + "\tCalibrate: " + String(calibrate));
+          if(calibrate){
+            x = 0.0;
+            y = 0.0;
+            z = 0.0;
+          }
         }
         else{
-          Serial.println("x: " + String(x) + "\ty: " + String(y) + "\tz: " + String(z));
+//          Serial.println("x: " + String(x) + "\ty: " + String(y) + "\tz: " + String(z));
         }
-      
+
       AsyncResponseStream *response = request->beginResponseStream("application/json");
-      DynamicJsonDocument json(1024);
+      DynamicJsonDocument json(2048);
       json["status"] = "ok";
       json["ssid"] = WiFi.SSID();
       json["ip"] = WiFi.softAPIP().toString();
@@ -95,14 +108,11 @@ void setup() {
 
   // Start server
   server.begin();
+
+  
 }
 
 
 void loop() {
-//  if((millis() - timer) > 100){
-////    calculate_IK(x, y, z);
-//    moveActuator();
-//    timer = millis();
-//  }
   moveActuator();
 }

@@ -28,8 +28,10 @@ void initActuator(){
   // attach servo to pin
   EndEffector.attach(SERVO_PIN);
 //  Arm1.setSpeed(15);
-  Arm1.setMaxSpeed(8000);
-  Arm1.setAcceleration(20000);
+
+  Arm1.setMaxSpeed(500);
+  Arm1.setAcceleration(1000);
+
   Serial.println("Servo and Stepper is ready");
 }
 
@@ -65,14 +67,12 @@ void moveActuator(){
     arm1CurrentAngle = arm1Angle;
   }
 //  Serial.println("End Effector: " + String(endEffectorAngle) + "\tArm1: " + String(arm1Angle)");
-  Serial.println("Speed1: " + String(Arm1.speed()) + "\tPos1: " + String(Arm1.currentPosition()) + "\tTarget1: " + String(arm1Step));
+//  Serial.println("Speed1: " + String(Arm1.speed()) + "\tPos1: " + String(Arm1.currentPosition()) + "\tTarget1: " + String(arm1Step));
 
   /* Stepper.h library */
 //  Arm1.step(arm1Pos);
 
   /* AccelStepper.h library */
-
-
   // not blocking but bad
   Arm1.run(); 
   
