@@ -1,6 +1,10 @@
 #include <SpeedTrig.h>
 
 #define PI 3.1415
+
+int arm1Offset = 0;
+int arm2Offset = 0;
+
 const float L1 = 10; //cm
 const float L2 = 7;
 const float GEAR_RATIO_1 = 2; // gear1 : gear2
