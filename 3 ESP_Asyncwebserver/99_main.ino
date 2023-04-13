@@ -60,6 +60,7 @@ void setup() {
       String mode = String(p->value());
       Serial.println(mode);
       if(mode.equals(String("Arrows"))){
+          Serial.println("Arrows");
           p = request->getParam(1);
           x = p->value().toFloat();
           p = request->getParam(2);
