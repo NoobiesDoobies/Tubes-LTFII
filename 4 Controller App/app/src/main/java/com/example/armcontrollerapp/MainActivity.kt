@@ -3,6 +3,7 @@ package com.example.armcontrollerapp
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Bundle
+import android.os.Handler
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -11,9 +12,13 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.IO
 import java.net.HttpURLConnection
 import java.net.URL
+import kotlin.math.cos
+import kotlin.math.sin
 
 class MainActivity : AppCompatActivity() {
+    val TIME_OUT_PING = 1500L
     val TIME_OUT = 1500L
+    val DELAY_PING_MS = 1000L
     private var x: Double = 0.0
     private var y: Double = 0.0
     private var z: Double = 0.0
@@ -23,6 +28,41 @@ class MainActivity : AppCompatActivity() {
 
     private var BASE_URL: String = "http://192.168.4.1"
     private var mode: String = "Arrows"
+    private val handler = Handler()
+    private var runnable: Runnable? = null
+
+    public suspend fun sendPing(): Unit{
+        val url = URL(BASE_URL)
+        val job = withTimeoutOrNull(TIME_OUT_PING){
+            with(url.openConnection() as HttpURLConnection) {
+                requestMethod = "GET"  // optional default is GET
+
+                println("\nPING TO : $url; Response Code : $responseCode")
+
+                inputStream.bufferedReader().use {
+                    it.lines().forEach { line ->
+                        println(line)
+                    }
+                }
+            }
+        }
+        if(job == null){
+            val cancelMessage = "Job took longer than $TIME_OUT"
+            println("debug: $cancelMessage")
+        }
+    }
+    public fun pingServer(): Unit{
+        runnable = object : Runnable {
+            override fun run() {
+                CoroutineScope(IO).launch{
+                    sendPing()
+                }
+                // Schedule the task to run again after a delay
+                handler.postDelayed(this, DELAY_PING_MS)
+            }
+        }
+        handler.post(runnable!!)
+    }
 
     public suspend fun sendDataToESP(): Unit{
         val url = URL(String.format("%s/posts?mode=%s&x=%.2f&y=%.2f&z=%.2f", BASE_URL, mode, x, y, z))
@@ -58,6 +98,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+//        pingServer()
 
         val btnLeft = findViewById<Button>(R.id.btnLeft)
         val btnRight = findViewById<Button>(R.id.btnRight)
@@ -80,22 +121,25 @@ class MainActivity : AppCompatActivity() {
         spinner.onItemSelectedListener = object :
             AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>,
-                                        view: View, position: Int, id: Long) {
-                mode = modes[position]
-                Toast.makeText(this@MainActivity,
-                    getString(R.string.selected_mode) + " " +
-                            "" + mode, Toast.LENGTH_SHORT).show()
-                println(mode)
-                when(mode){
-                    "Slider" -> {
-                        val intent = Intent(this@MainActivity, SliderMode::class.java)
-                        startActivity(intent)
-                    }
-                    "JoyStick" ->{
-                        val intent = Intent(this@MainActivity, JoyStickMode::class.java)
-                        startActivity(intent)
+                                        view: View?, position: Int, id: Long) {
+                if(view != null){
+                    mode = modes[position]
+                    Toast.makeText(this@MainActivity,
+                        getString(R.string.selected_mode) + " " +
+                                "" + mode, Toast.LENGTH_SHORT).show()
+                    println(mode)
+                    when(mode){
+                        "Slider" -> {
+                            val intent = Intent(this@MainActivity, SliderMode::class.java)
+                            startActivity(intent)
+                        }
+                        "JoyStick" ->{
+                            val intent = Intent(this@MainActivity, JoyStickMode::class.java)
+                            startActivity(intent)
+                        }
                     }
                 }
+
 
             }
 

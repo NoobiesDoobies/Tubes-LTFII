@@ -33,7 +33,7 @@ class JoyStickMode : AppCompatActivity(), JoyStick.JoyStickListener {
     var joystickPower: Double = 0.0
     private var BASE_URL: String = "http://192.168.4.1"
     private var mode: String = "JoyStick"
-        private val handler = Handler()
+    private val handler = Handler()
     private var runnable: Runnable? = null
 
 
@@ -140,31 +140,33 @@ class JoyStickMode : AppCompatActivity(), JoyStick.JoyStickListener {
 
             AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>,
-                                        view: View, position: Int, id: Long) {
+                                        view: View?, position: Int, id: Long) {
+                if(view != null){
+                    mode = modes[position]
 
-                mode = modes[position]
-
-                Toast.makeText(this@JoyStickMode,
-                    getString(R.string.selected_mode) + " " +
-                            "" + mode, Toast.LENGTH_SHORT).show()
-                when(mode){
-                    "Slider" -> {
-                        if (runnable != null) {
-                            handler.removeCallbacks(runnable!!)
-                            runnable = null
+                    Toast.makeText(this@JoyStickMode,
+                        getString(R.string.selected_mode) + " " +
+                                "" + mode, Toast.LENGTH_SHORT).show()
+                    when(mode){
+                        "Slider" -> {
+                            if (runnable != null) {
+                                handler.removeCallbacks(runnable!!)
+                                runnable = null
+                            }
+                            val intent = Intent(this@JoyStickMode, SliderMode::class.java)
+                            startActivity(intent)
                         }
-                        val intent = Intent(this@JoyStickMode, SliderMode::class.java)
-                        startActivity(intent)
-                    }
-                    "Arrows" ->{
-                        if (runnable != null) {
-                            handler.removeCallbacks(runnable!!)
-                            runnable = null
+                        "Arrows" ->{
+                            if (runnable != null) {
+                                handler.removeCallbacks(runnable!!)
+                                runnable = null
+                            }
+                            val intent = Intent(this@JoyStickMode, MainActivity::class.java)
+                            startActivity(intent)
                         }
-                        val intent = Intent(this@JoyStickMode, MainActivity::class.java)
-                        startActivity(intent)
                     }
                 }
+
 
             }
 

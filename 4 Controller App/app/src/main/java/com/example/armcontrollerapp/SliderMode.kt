@@ -124,21 +124,24 @@ class SliderMode : AppCompatActivity() {
         spinner.onItemSelectedListener = object :
             AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>,
-                                        view: View, position: Int, id: Long) {
-                mode = modes[position]
-                Toast.makeText(this@SliderMode,
-                    getString(R.string.selected_mode) + " " +
-                            "" + mode, Toast.LENGTH_SHORT).show()
-                when(mode){
-                    "JoyStick" -> {
-                        val intent = Intent(this@SliderMode, JoyStickMode::class.java)
-                        startActivity(intent)
-                    }
-                    "Arrows" ->{
-                        val intent = Intent(this@SliderMode, MainActivity::class.java)
-                        startActivity(intent)
+                                        view: View?, position: Int, id: Long) {
+                if(view != null){
+                    mode = modes[position]
+                    Toast.makeText(this@SliderMode,
+                        getString(R.string.selected_mode) + " " +
+                                "" + mode, Toast.LENGTH_SHORT).show()
+                    when(mode){
+                        "JoyStick" -> {
+                            val intent = Intent(this@SliderMode, JoyStickMode::class.java)
+                            startActivity(intent)
+                        }
+                        "Arrows" ->{
+                            val intent = Intent(this@SliderMode, MainActivity::class.java)
+                            startActivity(intent)
+                        }
                     }
                 }
+
 
             }
 
