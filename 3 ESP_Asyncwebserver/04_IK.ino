@@ -19,6 +19,8 @@ void calculate_IK(float x, float y, float z){
   float thetaP = SpeedTrig.atan2(x , y) * 180 / PI;
   float alpha = SpeedTrig.acos((L1*L1 + h2 - L2*L2)/(2*L1*sqrt(h2))) * 180 / PI;
   arm1Angle = thetaP - alpha;
+  arm1Angle = arm1Angle * GEAR_RATIO_1;
+  arm2Angle = arm2Angle * GEAR_RATIO_2;
 //
 //  endEffectorAngle = 0;
 }
