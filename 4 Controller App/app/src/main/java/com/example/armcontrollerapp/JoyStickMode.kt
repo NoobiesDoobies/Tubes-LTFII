@@ -33,7 +33,7 @@ import kotlinx.coroutines.sync.withLock
 
 
 class JoyStickMode : AppCompatActivity(), JoyStick.JoyStickListener {
-    val DELAY_MS: Long = 500
+    val DELAY_MS: Long = 50
     val TIME_OUT = 1000L
     val SCALE_DOWN: Double = 0.001
     val zIncrement = 0.3
@@ -60,10 +60,7 @@ class JoyStickMode : AppCompatActivity(), JoyStick.JoyStickListener {
                 xText.text = String.format("x: %.1f", x)
                 yText.text = String.format("y: %.1f", y)
 
-                CoroutineScope(IO).launch{
-                    sendDataToESP(x, y, z)
-                    println(String.format("VALUE: %.1f %.1f %.1f", x, y, z))
-                }
+
                 // Schedule the task to run again after a delay
                 handler.postDelayed(this, DELAY_MS)
             }
@@ -100,6 +97,24 @@ class JoyStickMode : AppCompatActivity(), JoyStick.JoyStickListener {
             }
         }
 
+    }
+
+    private var sendJob: Job? = null
+
+    override fun onResume() {
+        super.onResume()
+        sendJob = CoroutineScope(Dispatchers.IO).launch {
+            while (isActive) {
+                updatePositionUI()
+                sendDataToESP(x, y, z)
+                delay(DELAY_MS)
+            }
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        sendJob?.cancel()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -167,6 +182,7 @@ class JoyStickMode : AppCompatActivity(), JoyStick.JoyStickListener {
                                 handler.removeCallbacks(runnable!!)
                                 runnable = null
                             }
+                            finish()
                             val intent = Intent(this@JoyStickMode, SliderMode::class.java)
                             startActivity(intent)
                         }
@@ -175,6 +191,7 @@ class JoyStickMode : AppCompatActivity(), JoyStick.JoyStickListener {
                                 handler.removeCallbacks(runnable!!)
                                 runnable = null
                             }
+                            finish()
                             val intent = Intent(this@JoyStickMode, MainActivity::class.java)
                             startActivity(intent)
                         }
