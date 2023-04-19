@@ -42,9 +42,9 @@ void handleHTTP(){
       AsyncWebParameter* p = request->getParam(0);
 //      const char *mode = p->value().c_str();
       String mode = String(p->value());
-      Serial.println(mode);
+      // Serial.println(mode);
       if(mode.equals(String("Arrows"))){
-          Serial.println("Arrows");
+          // Serial.println("Arrows");
           p = request->getParam(1);
           x = p->value().toFloat();
           p = request->getParam(2);
@@ -53,7 +53,7 @@ void handleHTTP(){
           z = p->value().toFloat();
       }
       else if(mode.equals(String("JoyStick"))){
-        Serial.println("JOYSTICK");
+        // Serial.println("JOYSTICK");
           p = request->getParam(1);
           x = p->value().toFloat();
           p = request->getParam(2);
@@ -62,7 +62,7 @@ void handleHTTP(){
           z = p->value().toFloat();
       }
       else if(mode.equals(String("Slider"))){
-          Serial.println("SLIDER");
+          // Serial.println("SLIDER");
           p = request->getParam(4);
           calibrate = p->value().toInt();
           if(calibrate){
@@ -79,11 +79,11 @@ void handleHTTP(){
       }
 
         if(mode[0] == 'S'){
-//          Serial.println("Arm1: " + String(arm1Angle) + "\tArm2: " + String(arm2Angle) + "\tEnd Effector: " + String(endEffectorAngle) + "\tCalibrate: " + String(calibrate));
+         Serial.println("Arm1: " + String(arm1Angle) + "\tArm2: " + String(arm2Angle) + "\tEnd Effector: " + String(endEffectorAngle) + "\tCalibrate: " + String(calibrate));
 
         }
         else{
-//          Serial.println("x: " + String(x) + "\ty: " + String(y) + "\tz: " + String(z));
+         Serial.println("x: " + String(x) + "\ty: " + String(y) + "\tz: " + String(z));
         }
 
       AsyncResponseStream *response = request->beginResponseStream("application/json");

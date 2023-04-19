@@ -1,9 +1,11 @@
 package com.example.armcontrollerapp
+import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.View
 import android.view.Window
 import android.widget.*
@@ -20,14 +22,20 @@ import java.net.URL
 import com.erz.joysticklibrary.JoyStick;
 import kotlin.math.cos
 import kotlin.math.sin
+import androidx.lifecycle.lifecycleScope
+import com.example.armcontrollerapp.Globals.Companion.x
+import com.example.armcontrollerapp.Globals.Companion.y
+import com.example.armcontrollerapp.Globals.Companion.z
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
+
 
 class JoyStickMode : AppCompatActivity(), JoyStick.JoyStickListener {
-    val DELAY_MS: Long = 50
+    val DELAY_MS: Long = 500
     val TIME_OUT = 1000L
     val SCALE_DOWN: Double = 0.001
-    var x: Double = 0.0
-    var y: Double = 0.0
-    var z: Double = 0.0
     val zIncrement = 0.3
     var joystickAngle: Double = 0.0
     var joystickPower: Double = 0.0
@@ -35,6 +43,8 @@ class JoyStickMode : AppCompatActivity(), JoyStick.JoyStickListener {
     private var mode: String = "JoyStick"
     private val handler = Handler()
     private var runnable: Runnable? = null
+
+
 
 
     public fun updatePositionUI(): Unit{
@@ -51,7 +61,8 @@ class JoyStickMode : AppCompatActivity(), JoyStick.JoyStickListener {
                 yText.text = String.format("y: %.1f", y)
 
                 CoroutineScope(IO).launch{
-                    sendDataToESP()
+                    sendDataToESP(x, y, z)
+                    println(String.format("VALUE: %.1f %.1f %.1f", x, y, z))
                 }
                 // Schedule the task to run again after a delay
                 handler.postDelayed(this, DELAY_MS)
@@ -65,26 +76,28 @@ class JoyStickMode : AppCompatActivity(), JoyStick.JoyStickListener {
             .show()
     }
 
-    public suspend fun sendDataToESP(): Unit{
-//        val url = URL(BASE_URL + "/posts" + "?mode=JoyStick&x=$x&y=$y&z=$z")
-        val url =URL(String.format("%s/posts?mode=JoyStick&x=%.2f&y=%.2f&z=%.2f", BASE_URL, x, y, z))
-        println(url)
-        val job = withTimeoutOrNull(TIME_OUT){
-            with(url.openConnection() as HttpURLConnection) {
-                requestMethod = "GET"  // optional default is GET
+    val mutex = Mutex()
+    public suspend fun sendDataToESP(x: Double, y: Double, z:Double): Unit{
+        mutex.withLock {
+            val url =URL(String.format("%s/posts?mode=JoyStick&x=%.2f&y=%.2f&z=%.2f", BASE_URL, x, y, z))
+//            println(url)
+            val job = withTimeoutOrNull(TIME_OUT){
+                with(url.openConnection() as HttpURLConnection) {
+                    requestMethod = "GET"  // optional default is GET
 
-                println("\nSent 'GET' request to URL : $url; Response Code : $responseCode")
+                    println("\nSent 'GET' request to URL : $url; Response Code : $responseCode")
 
-                inputStream.bufferedReader().use {
-                    it.lines().forEach { line ->
-                        println(line)
+                    inputStream.bufferedReader().use {
+                        it.lines().forEach { line ->
+                            println(line)
+                        }
                     }
                 }
             }
-        }
-        if(job == null){
-            val cancelMessage = "Job took longer than $TIME_OUT"
-            println("debug: $cancelMessage")
+            if(job == null){
+                val cancelMessage = "Job took longer than $TIME_OUT"
+                println("debug: $cancelMessage")
+            }
         }
 
     }
@@ -92,6 +105,7 @@ class JoyStickMode : AppCompatActivity(), JoyStick.JoyStickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.joystick_layout)
+
         updatePositionUI()
 
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE

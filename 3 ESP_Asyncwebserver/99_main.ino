@@ -11,17 +11,7 @@ void setup() {
 
   // initEEPROM();
   initWiFi(); 
-
-  while(!Serial.available()){}
-  int maxVelocity = Serial.parseInt();
-  int accelaration = Serial.parseInt();
-  Arm1.setMaxSpeed(maxVelocity);
-  Arm1.setAcceleration(accelaration);
-
-  Serial.println("MaxSpeed = " + String(maxVelocity) + "\tAccel: " + String(accelaration));
-  
-  initActuator();
-    
+  initActuator();  
   handleHTTP();
 
 

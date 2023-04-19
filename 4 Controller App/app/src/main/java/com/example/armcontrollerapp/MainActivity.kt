@@ -7,6 +7,9 @@ import android.os.Handler
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import com.example.armcontrollerapp.Globals.Companion.x
+import com.example.armcontrollerapp.Globals.Companion.y
+import com.example.armcontrollerapp.Globals.Companion.z
 
 import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.IO
@@ -19,9 +22,6 @@ class MainActivity : AppCompatActivity() {
     val TIME_OUT_PING = 1500L
     val TIME_OUT = 1500L
     val DELAY_PING_MS = 1000L
-    private var x: Double = 0.0
-    private var y: Double = 0.0
-    private var z: Double = 0.0
     private var xIncrement: Double = 0.5
     private var yIncrement: Double = 0.7
     private var zIncrement: Double = 0.3
