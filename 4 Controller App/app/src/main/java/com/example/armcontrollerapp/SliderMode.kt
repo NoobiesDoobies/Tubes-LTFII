@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import com.example.armcontrollerapp.Globals.Companion.calibrate
 import com.google.android.material.slider.RangeSlider
 import com.google.android.material.slider.Slider
 import kotlinx.coroutines.CoroutineScope
@@ -20,7 +21,6 @@ class SliderMode : AppCompatActivity() {
     var arm1Angle: Double = 0.0
     var arm2Angle: Double = 0.0
     var endEffectorAngle: Double = 0.0
-    var calibrate: Int = 0
     private var BASE_URL: String = "http://192.168.4.1"
     var mode: String = "Slider"
     val TIME_OUT = 1000L
@@ -78,9 +78,6 @@ class SliderMode : AppCompatActivity() {
             Arm2.value = arm2Angle.toFloat()
             EndEffector.value = endEffectorAngle.toFloat()
             calibrate = 1
-            CoroutineScope(Dispatchers.IO).launch{
-                sendDataToESP()
-            }
         }
 
        Arm1.addOnChangeListener(object: Slider.OnChangeListener{

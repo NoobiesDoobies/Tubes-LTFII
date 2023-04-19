@@ -76,14 +76,15 @@ void moveActuator(){
 //  Serial.print("End Effector: " + String(endEffectorAngle));
   EndEffector.write(endEffectorAngle);
 //  float deltaArm1 = arm1Angle - arm1CurrentAngle;
-  int arm1Step = map(arm1Angle+180, 0, 360, 0, stepsPerRevolution);
+  int arm1Step = map(arm1Angle+arm1Offset, arm1Offset, 360+arm1Offset, 0, stepsPerRevolution);
 //   if(arm1CurrentAngle != arm1Angle){
 //     Serial.println("Setting MOVETO");
 //     Arm1.moveTo(arm1Angle + arm1Offset);
 // //    Arm1.run(); 
 //     arm1CurrentAngle = arm1Angle;
 //   }
-  Arm1.moveTo(arm1Angle + arm1Offset);
+  
+  Arm1.moveTo(arm1Step);
   Arm2.moveTo(arm2Angle + arm2Offset);
 //  Serial.println("End Effector: " + String(endEffectorAngle) + "\tArm1: " + String(arm1Angle));
 //  Serial.println("Speed1: " + String(Arm1.speed()) + "\tPos1: " + String(Arm1.currentPosition()) + "\tTarget1: " + String(arm1Step) + "Offset: " + String(arm1Offset));

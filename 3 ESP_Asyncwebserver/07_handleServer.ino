@@ -42,7 +42,7 @@ void handleHTTP(){
       AsyncWebParameter* p = request->getParam(0);
 //      const char *mode = p->value().c_str();
       String mode = String(p->value());
-      // Serial.println(mode);
+      Serial.print(mode+"\t");
       if(mode.equals(String("Arrows"))){
           // Serial.println("Arrows");
           p = request->getParam(1);
@@ -66,9 +66,9 @@ void handleHTTP(){
           p = request->getParam(4);
           calibrate = p->value().toInt();
           if(calibrate){
-            Serial.println("Calibrating");
-            arm1Offset = arm1Angle;
-            arm2Offset = arm2Angle;
+            Serial.print("Calibrating\t");
+            arm1Offset = arm1Offset + arm1Angle;
+            arm2Offset = arm2Offset + arm2Angle;
           }
           p = request->getParam(1);
           arm1Angle = p->value().toFloat();
@@ -79,7 +79,7 @@ void handleHTTP(){
       }
 
         if(mode[0] == 'S'){
-         Serial.println("Arm1: " + String(arm1Angle) + "\tArm2: " + String(arm2Angle) + "\tEnd Effector: " + String(endEffectorAngle) + "\tCalibrate: " + String(calibrate));
+         Serial.println("Arm1: " + String(arm1Angle) + "\tArm2: " + String(arm2Angle) + "\tEnd Effector: " + String(endEffectorAngle) + "\tOffset1: " + String(arm1Offset) + "\tOffset2:  " + String(arm2Offset) + "\tCalibrate: " + String(calibrate));
 
         }
         else{
