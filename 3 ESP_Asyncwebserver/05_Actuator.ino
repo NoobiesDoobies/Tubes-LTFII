@@ -86,7 +86,7 @@ void moveActuator(){
   
   Arm1.moveTo(arm1Step);
   Arm2.moveTo(arm2Angle + arm2Offset);
-//  Serial.println("End Effector: " + String(endEffectorAngle) + "\tArm1: " + String(arm1Angle));
+  Serial.println("End Effector: " + String(endEffectorAngle) + "\tArm1: " + String(arm1Angle) + "\tArm2: " + String(arm2Angle));
 //  Serial.println("Speed1: " + String(Arm1.speed()) + "\tPos1: " + String(Arm1.currentPosition()) + "\tTarget1: " + String(arm1Step) + "Offset: " + String(arm1Offset));
 
   /* Stepper.h library */

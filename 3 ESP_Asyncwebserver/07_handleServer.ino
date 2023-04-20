@@ -1,7 +1,7 @@
 #include <ArduinoJson.h>
 
 int calibrate = 0;
-
+String mode = "Arrows";
 void handleHTTP(){
   server.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
         Serial.println("GETTING /");
@@ -16,7 +16,7 @@ void handleHTTP(){
         request->send(response);
     });
    server.on("/posts", HTTP_GET, [](AsyncWebServerRequest *request){
-      Serial.println("GETTING");
+//      Serial.println("GETTING");
 //      int paramsNr = request->params();
 //      Serial.println(paramsNr);
 //      for(int i=0;i<paramsNr;i++){
@@ -41,10 +41,9 @@ void handleHTTP(){
 
       AsyncWebParameter* p = request->getParam(0);
 //      const char *mode = p->value().c_str();
-      String mode = String(p->value());
-      Serial.print(mode+"\t");
+      mode = String(p->value());
+//      Serial.print(mode+"\t");
       if(mode.equals(String("Arrows"))){
-          // Serial.println("Arrows");
           p = request->getParam(1);
           x = p->value().toFloat();
           p = request->getParam(2);
@@ -53,37 +52,42 @@ void handleHTTP(){
           z = p->value().toFloat();
       }
       else if(mode.equals(String("JoyStick"))){
-        // Serial.println("JOYSTICK");
           p = request->getParam(1);
           x = p->value().toFloat();
           p = request->getParam(2);
           y = p->value().toFloat();
           p = request->getParam(3);
           z = p->value().toFloat();
+
+          x = constrain(x, 0, 40);
+          y = constrain(y, 0, 40);
       }
       else if(mode.equals(String("Slider"))){
-          // Serial.println("SLIDER");
           p = request->getParam(4);
           calibrate = p->value().toInt();
           if(calibrate){
             Serial.print("Calibrating\t");
-            arm1Offset = arm1Offset + arm1Angle;
-            arm2Offset = arm2Offset + arm2Angle;
+            arm1Offset = arm1Angle;
+            arm2Offset = arm2Angle;
+            x = 0.0;
+            y = 40.0;
           }
           p = request->getParam(1);
-          arm1Angle = p->value().toFloat();
+          arm1Angle = p->value().toFloat()*GEAR_RATIO_1;
           p = request->getParam(2);
-          arm2Angle = p->value().toFloat();
+          arm2Angle = p->value().toFloat()*GEAR_RATIO_2;
           p = request->getParam(3);
           endEffectorAngle = p->value().toFloat();
+          arm1Angle = constrain(arm1Angle, -90, 90);
+          arm2Angle = constrain(arm2Angle, -90, 90);
       }
 
         if(mode[0] == 'S'){
-         Serial.println("Arm1: " + String(arm1Angle) + "\tArm2: " + String(arm2Angle) + "\tEnd Effector: " + String(endEffectorAngle) + "\tOffset1: " + String(arm1Offset) + "\tOffset2:  " + String(arm2Offset) + "\tCalibrate: " + String(calibrate));
+//         Serial.println("Arm1: " + String(arm1Angle) + "\tArm2: " + String(arm2Angle) + "\tEnd Effector: " + String(endEffectorAngle) + "\tOffset1: " + String(arm1Offset) + "\tOffset2:  " + String(arm2Offset) + "\tCalibrate: " + String(calibrate));
 
         }
         else{
-         Serial.println("x: " + String(x) + "\ty: " + String(y) + "\tz: " + String(z));
+//         Serial.println("x: " + String(x) + "\ty: " + String(y) + "\tz: " + String(z));
         }
 
       AsyncResponseStream *response = request->beginResponseStream("application/json");

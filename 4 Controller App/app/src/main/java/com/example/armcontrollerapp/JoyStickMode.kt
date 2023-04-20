@@ -35,7 +35,7 @@ import kotlinx.coroutines.sync.withLock
 class JoyStickMode : AppCompatActivity(), JoyStick.JoyStickListener {
     val DELAY_MS: Long = 50
     val TIME_OUT = 1000L
-    val SCALE_DOWN: Double = 0.001
+    val SCALE_DOWN: Double = 0.000005
     val zIncrement = 0.3
     var joystickAngle: Double = 0.0
     var joystickPower: Double = 0.0
@@ -56,7 +56,8 @@ class JoyStickMode : AppCompatActivity(), JoyStick.JoyStickListener {
                 // Call your function here
                 x += -joystickPower*cos(joystickAngle)*SCALE_DOWN
                 y += joystickPower*sin(joystickAngle)*SCALE_DOWN
-
+                x = x.coerceIn(0.0, 40.0)
+                y = y.coerceIn(0.0, 40.0)
                 xText.text = String.format("x: %.1f", x)
                 yText.text = String.format("y: %.1f", y)
 
@@ -147,7 +148,7 @@ class JoyStickMode : AppCompatActivity(), JoyStick.JoyStickListener {
 
         btnCalibrate.setOnClickListener{
             x = 0.0
-            y = 0.0
+            y = 40.0
             z = 0.0
             xText.text = String.format("x: %.1f", x)
             yText.text = String.format("y: %.1f", y)

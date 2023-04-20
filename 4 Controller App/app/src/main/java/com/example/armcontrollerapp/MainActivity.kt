@@ -150,6 +150,7 @@ class MainActivity : AppCompatActivity() {
 
         btnLeft.setOnClickListener{
             x-=xIncrement
+            x = x.coerceIn(0.0, 40.0)
             xText.text = String.format("x: %.1f", x)
             CoroutineScope(IO).launch{
                 sendDataToESP()
@@ -158,6 +159,7 @@ class MainActivity : AppCompatActivity() {
 
         btnRight.setOnClickListener{
             x+=xIncrement
+            x = x.coerceIn(0.0, 40.0)
             xText.text = String.format("x: %.1f", x)
             CoroutineScope(IO).launch{
                 sendDataToESP()
@@ -166,6 +168,7 @@ class MainActivity : AppCompatActivity() {
 
         btnUp.setOnClickListener{
             y+=yIncrement
+            y = y.coerceIn(0.0, 40.0)
             yText.text = String.format("y: %.1f", y)
             CoroutineScope(IO).launch{
                 sendDataToESP()
@@ -174,6 +177,7 @@ class MainActivity : AppCompatActivity() {
 
         btnDown.setOnClickListener{
             y-=yIncrement
+            y = y.coerceIn(0.0, 40.0)
             yText.text = String.format("y: %.1f", y)
             CoroutineScope(IO).launch{
                 sendDataToESP()
@@ -200,7 +204,7 @@ class MainActivity : AppCompatActivity() {
 
         btnCalibrate.setOnClickListener{
             x = 0.0
-            y = 0.0
+            y = 40.0
             z = 0.0
             xText.text = String.format("x: %.1f", x)
             yText.text = String.format("y: %.1f", y)

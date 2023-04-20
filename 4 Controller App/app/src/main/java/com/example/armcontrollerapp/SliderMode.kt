@@ -8,6 +8,8 @@ import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.armcontrollerapp.Globals.Companion.calibrate
+import com.example.armcontrollerapp.Globals.Companion.x
+import com.example.armcontrollerapp.Globals.Companion.y
 import com.google.android.material.slider.RangeSlider
 import com.google.android.material.slider.Slider
 import kotlinx.coroutines.CoroutineScope
@@ -77,6 +79,8 @@ class SliderMode : AppCompatActivity() {
             Arm1.value = arm1Angle.toFloat()
             Arm2.value = arm2Angle.toFloat()
             EndEffector.value = endEffectorAngle.toFloat()
+            x = 0.0
+            y = 40.0
             calibrate = 1
         }
 

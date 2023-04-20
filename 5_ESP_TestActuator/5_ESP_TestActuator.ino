@@ -75,13 +75,13 @@ void setup() {
   // Set the initial position of the stepper motor to 0
   stepper.setCurrentPosition(0);
   stepper2.setCurrentPosition(0);
-  steps = angle * STEPS_PER_REVOLUTION / 360;
+  steps = angle * STEPS_PER_REVOLUTION / 360 * 2;
 
 
   
   servo.attach(servoPin);
-  stepper.moveTo(steps);
-  // stepper2.moveTo(steps);
+  // stepper.moveTo(steps);
+  stepper2.moveTo(steps);
   timer = millis();
 }
 
@@ -92,8 +92,8 @@ void loop() {
   else{
         Serial.println("Position: " + String(stepper.currentPosition()) + "\tSpeed: " + String(stepper.speed()) + "\tTarget: " + String(steps) + "\tTotal time = " + String(millis()-timer));
   }
-  stepper.run();
-  // stepper2.run();
+  // stepper.run();
+  stepper2.run();
   servo.write(angle);
 
   

@@ -33,6 +33,10 @@ void setup() {
 
 
 void loop() {
+  if(!mode.equals(String("Slider"))){
+    calculate_IK(x, y, z);
+  }
+  
   moveActuator();
   // if(!firstPing){
   //   checkConnection();
