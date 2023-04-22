@@ -50,6 +50,7 @@ void handleHTTP(){
           y = p->value().toFloat();
           p = request->getParam(3);
           z = p->value().toFloat();
+          
       }
       else if(mode.equals(String("JoyStick"))){
           p = request->getParam(1);
@@ -61,6 +62,7 @@ void handleHTTP(){
 
           x = constrain(x, 0, 40);
           y = constrain(y, 0, 40);
+          
       }
       else if(mode.equals(String("Slider"))){
           p = request->getParam(4);
@@ -69,6 +71,7 @@ void handleHTTP(){
             Serial.print("Calibrating\t");
             arm1Offset = arm1Angle;
             arm2Offset = arm2Angle;
+            Serial.println("Offset: " + String(arm1Offset));
             x = 0.0;
             y = 40.0;
           }
@@ -78,8 +81,6 @@ void handleHTTP(){
           arm2Angle = p->value().toFloat()*GEAR_RATIO_2;
           p = request->getParam(3);
           endEffectorAngle = p->value().toFloat();
-          arm1Angle = constrain(arm1Angle, -90, 90);
-          arm2Angle = constrain(arm2Angle, -90, 90);
       }
 
         if(mode[0] == 'S'){

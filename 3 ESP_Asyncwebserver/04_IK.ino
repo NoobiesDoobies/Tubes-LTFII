@@ -30,7 +30,7 @@ void calculate_IK(float x, float y, float z){
 //  arm2Angle = arm2Angle * GEAR_RATIO_2;
 
   
-  Serial.print("x: " + String(x) + "\ty: " + String(y) + "\tAngle1: " + String(arm1Angle) + "\tAngle2: " + String(arm2Angle));
+//  Serial.print("x: " + String(x) + "\ty: " + String(y) + "\tAngle1: " + String(arm1Angle) + "\tAngle2: " + String(arm2Angle));
   // Wrap around 
   arm1Angle = wrap_around(arm1Angle);
   arm2Angle = wrap_around(arm2Angle);
@@ -38,7 +38,7 @@ void calculate_IK(float x, float y, float z){
   // Set constrain
   arm1Angle = constrain(arm1Angle, -90, 90);
   arm2Angle = constrain(arm2Angle, -170, 170);
-  Serial.println("\tAngle1: " + String(arm1Angle) + "\tAngle2: " + String(arm2Angle));
+//  Serial.println("\tAngle1: " + String(arm1Angle) + "\tAngle2: " + String(arm2Angle));
 
   
   

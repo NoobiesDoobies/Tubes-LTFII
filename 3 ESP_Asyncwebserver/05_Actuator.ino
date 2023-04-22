@@ -4,7 +4,7 @@
 #define SUDUT_MIN 0
 #define SUDUT_MAX 180
 
-#define STEPPER_SPEED 600
+#define STEPPER_SPEED 400
 
 float arm1CurrentAngle = 0;
 const float stepsPerRevolution = 2048;  // jumlah langkah per satu putaran penuh
@@ -48,6 +48,7 @@ void initActuator(){
   Arm1.setCurrentPosition(0);
   Arm2.setCurrentPosition(0);
 
+  EndEffector.write(0);
   Serial.println("Servo and Stepper is ready");
 }
 
@@ -76,17 +77,14 @@ void moveActuator(){
 //  Serial.print("End Effector: " + String(endEffectorAngle));
   EndEffector.write(endEffectorAngle);
 //  float deltaArm1 = arm1Angle - arm1CurrentAngle;
-  int arm1Step = map(arm1Angle+arm1Offset, arm1Offset, 360+arm1Offset, 0, stepsPerRevolution);
-//   if(arm1CurrentAngle != arm1Angle){
-//     Serial.println("Setting MOVETO");
-//     Arm1.moveTo(arm1Angle + arm1Offset);
-// //    Arm1.run(); 
-//     arm1CurrentAngle = arm1Angle;
-//   }
-  
+  int arm1Step = map(arm1Angle+arm1Offset, 0, 360, 0, stepsPerRevolution);
+  int arm2Step = map(arm2Angle+arm2Offset, 0, 360, 0, stepsPerRevolution);
+//  Serial.println("Arm1Step: " + String(arm1Step) + "\tArm2Step: " + String(arm2Step) + "\tOffset1: " + String(arm1Offset) + "\tOffset2: " + String(arm2Offset));
+  Serial.println("offset: " + String(arm1Offset) + "\tstep: " + String(arm1Step) + "\tangle: " + String(arm1Angle));
   Arm1.moveTo(arm1Step);
-  Arm2.moveTo(arm2Angle + arm2Offset);
-  Serial.println("End Effector: " + String(endEffectorAngle) + "\tArm1: " + String(arm1Angle) + "\tArm2: " + String(arm2Angle));
+  Arm2.moveTo(arm2Step);
+  
+//  Serial.println("End Effector: " + String(endEffectorAngle) + "\tArm1: " + String(arm1Angle) + "\tArm2: " + String(arm2Angle));
 //  Serial.println("Speed1: " + String(Arm1.speed()) + "\tPos1: " + String(Arm1.currentPosition()) + "\tTarget1: " + String(arm1Step) + "Offset: " + String(arm1Offset));
 
   /* Stepper.h library */
