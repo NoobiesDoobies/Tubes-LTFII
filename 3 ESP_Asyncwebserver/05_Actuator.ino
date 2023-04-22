@@ -48,7 +48,7 @@ void initActuator(){
   Arm1.setCurrentPosition(0);
   Arm2.setCurrentPosition(0);
 
-  EndEffector.write(0);
+  EndEffector.write(5);
   Serial.println("Servo and Stepper is ready");
 }
 
@@ -76,28 +76,14 @@ void moveActuator(){
   //move all actuator to the desired angle
 //  Serial.print("End Effector: " + String(endEffectorAngle));
   EndEffector.write(endEffectorAngle);
-//  float deltaArm1 = arm1Angle - arm1CurrentAngle;
   int arm1Step = map(arm1Angle+arm1Offset, 0, 360, 0, stepsPerRevolution);
   int arm2Step = map(arm2Angle+arm2Offset, 0, 360, 0, stepsPerRevolution);
-//  Serial.println("Arm1Step: " + String(arm1Step) + "\tArm2Step: " + String(arm2Step) + "\tOffset1: " + String(arm1Offset) + "\tOffset2: " + String(arm2Offset));
-  Serial.println("offset: " + String(arm1Offset) + "\tstep: " + String(arm1Step) + "\tangle: " + String(arm1Angle));
+//  Serial.println("offset: " + String(arm1Offset) + "\tstep: " + String(arm1Step) + "\tangle: " + String(arm1Angle));
   Arm1.moveTo(arm1Step);
   Arm2.moveTo(arm2Step);
-  
-//  Serial.println("End Effector: " + String(endEffectorAngle) + "\tArm1: " + String(arm1Angle) + "\tArm2: " + String(arm2Angle));
-//  Serial.println("Speed1: " + String(Arm1.speed()) + "\tPos1: " + String(Arm1.currentPosition()) + "\tTarget1: " + String(arm1Step) + "Offset: " + String(arm1Offset));
-
-  /* Stepper.h library */
-//  Arm1.step(arm1Pos);
 
   /* AccelStepper.h library */
-  // not blocking but bad
   Arm1.run(); 
   Arm2.run();
   
-  
-  // blocking but very smooth
-  // Arm1.runToNewPosition(arm1Step);
-  
-
 }

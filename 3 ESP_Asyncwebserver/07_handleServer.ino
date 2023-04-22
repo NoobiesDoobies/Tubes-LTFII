@@ -69,8 +69,8 @@ void handleHTTP(){
           calibrate = p->value().toInt();
           if(calibrate){
             Serial.print("Calibrating\t");
-            arm1Offset = arm1Angle;
-            arm2Offset = arm2Angle;
+            arm1Offset = arm1Angle + arm1Offset;
+            arm2Offset = arm2Angle + arm2Offset;
             Serial.println("Offset: " + String(arm1Offset));
             x = 0.0;
             y = 40.0;

@@ -35,7 +35,7 @@ import kotlinx.coroutines.sync.withLock
 class JoyStickMode : AppCompatActivity(), JoyStick.JoyStickListener {
     val DELAY_MS: Long = 50
     val TIME_OUT = 1000L
-    val SCALE_DOWN: Double = 0.000005
+    val SCALE_DOWN: Double = 0.0000005
     val zIncrement = 0.3
     var joystickAngle: Double = 0.0
     var joystickPower: Double = 0.0
