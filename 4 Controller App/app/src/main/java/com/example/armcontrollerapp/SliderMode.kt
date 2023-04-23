@@ -80,7 +80,7 @@ class SliderMode : AppCompatActivity() {
             Arm2.value = arm2Angle.toFloat()
             EndEffector.value = endEffectorAngle.toFloat()
             x = 0.0
-            y = 40.0
+            y = 30.0
             calibrate = 1
         }
 

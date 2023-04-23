@@ -3,12 +3,12 @@
 int arm1Offset = 0;
 int arm2Offset = 0;
 
-const float L1 = 20; //cm
-const float L2 = 20;
-const float L = 20;
+const float L1 = 15; //cm
+const float L2 = 15;
+const float L = 15;
 const float GEAR_RATIO_1 = 2; // gear1 : gear2
 const float GEAR_RATIO_2 = 2;
-float x = 0,y = 40,z = 0;
+float x = 0,y = 30,z = 0;
 float arm1Angle, arm2Angle, endEffectorAngle;
 
 float wrap_around(float angle){
@@ -18,6 +18,8 @@ float wrap_around(float angle){
    }
    return angle;
 }
+
+
 
 void calculate_IK(float x, float y, float z){
   float h = sqrt(x*x+y*y);

@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
     val TIME_OUT = 1500L
     val DELAY_PING_MS = 1000L
     private var xIncrement: Double = 0.5
-    private var yIncrement: Double = 0.7
+    private var yIncrement: Double = 0.5
     private var zIncrement: Double = 0.3
 
     private var BASE_URL: String = "http://192.168.4.1"
@@ -104,6 +104,11 @@ class MainActivity : AppCompatActivity() {
         val btnRight = findViewById<Button>(R.id.btnRight)
         val btnUp = findViewById<Button>(R.id.btnUp)
         val btnDown = findViewById<Button>(R.id.btnDown)
+        val btnUpRight = findViewById<Button>(R.id.btnUpRight)
+        val btnUpLeft = findViewById<Button>(R.id.btnUpLeft)
+        val btnDownRight = findViewById<Button>(R.id.btnDownRight)
+        val btnDownLeft = findViewById<Button>(R.id.btnDownLeft)
+
         val btnZPos = findViewById<Button>(R.id.btnZPos)
         val btnZNeg = findViewById<Button>(R.id.btnZNeg)
         val btnCalibrate = findViewById<Button>(R.id.calibrate)
@@ -150,7 +155,7 @@ class MainActivity : AppCompatActivity() {
 
         btnLeft.setOnClickListener{
             x-=xIncrement
-            x = x.coerceIn(0.0, 40.0)
+            x = x.coerceIn(0.0, 30.0)
             xText.text = String.format("x: %.1f", x)
             CoroutineScope(IO).launch{
                 sendDataToESP()
@@ -159,7 +164,7 @@ class MainActivity : AppCompatActivity() {
 
         btnRight.setOnClickListener{
             x+=xIncrement
-            x = x.coerceIn(0.0, 40.0)
+            x = x.coerceIn(0.0, 30.0)
             xText.text = String.format("x: %.1f", x)
             CoroutineScope(IO).launch{
                 sendDataToESP()
@@ -168,7 +173,7 @@ class MainActivity : AppCompatActivity() {
 
         btnUp.setOnClickListener{
             y+=yIncrement
-            y = y.coerceIn(0.0, 40.0)
+            y = y.coerceIn(0.0, 30.0)
             yText.text = String.format("y: %.1f", y)
             CoroutineScope(IO).launch{
                 sendDataToESP()
@@ -177,12 +182,57 @@ class MainActivity : AppCompatActivity() {
 
         btnDown.setOnClickListener{
             y-=yIncrement
-            y = y.coerceIn(0.0, 40.0)
+            y = y.coerceIn(0.0, 30.0)
             yText.text = String.format("y: %.1f", y)
             CoroutineScope(IO).launch{
                 sendDataToESP()
             }
 
+        }
+
+        btnUpRight.setOnClickListener{
+            x+=xIncrement
+            x = x.coerceIn(0.0, 30.0)
+            y+=yIncrement
+            y = y.coerceIn(0.0, 30.0)
+            xText.text = String.format("x: %.1f", x)
+            yText.text = String.format("y: %.1f", y)
+            CoroutineScope(IO).launch{
+                sendDataToESP()
+            }
+        }
+        btnUpLeft.setOnClickListener{
+            x-=xIncrement
+            x = x.coerceIn(0.0, 30.0)
+            y+=yIncrement
+            y = y.coerceIn(0.0, 30.0)
+            xText.text = String.format("x: %.1f", x)
+            yText.text = String.format("y: %.1f", y)
+            CoroutineScope(IO).launch{
+                sendDataToESP()
+            }
+        }
+        btnDownLeft.setOnClickListener{
+            x-=xIncrement
+            x = x.coerceIn(0.0, 30.0)
+            y-=yIncrement
+            y = y.coerceIn(0.0, 30.0)
+            xText.text = String.format("x: %.1f", x)
+            yText.text = String.format("y: %.1f", y)
+            CoroutineScope(IO).launch{
+                sendDataToESP()
+            }
+        }
+        btnDownRight.setOnClickListener{
+            x+=xIncrement
+            x = x.coerceIn(0.0, 30.0)
+            y-=yIncrement
+            y = y.coerceIn(0.0, 30.0)
+            xText.text = String.format("x: %.1f", x)
+            yText.text = String.format("y: %.1f", y)
+            CoroutineScope(IO).launch{
+                sendDataToESP()
+            }
         }
 
         btnZPos.setOnClickListener{
@@ -204,7 +254,7 @@ class MainActivity : AppCompatActivity() {
 
         btnCalibrate.setOnClickListener{
             x = 0.0
-            y = 40.0
+            y = 30.0
             z = 0.0
             xText.text = String.format("x: %.1f", x)
             yText.text = String.format("y: %.1f", y)

@@ -9,7 +9,7 @@
     tools:layout_editor_absoluteY="-5dp">
 
 
-        
+
     <Button
         android:id="@+id/btnZPos"
         android:layout_width="79dp"
@@ -54,6 +54,57 @@
         app:layout_constraintStart_toStartOf="parent"
         android:textSize="32dp"/>
 
+    <Button
+        android:id="@+id/btnUpRight"
+        android:layout_width="79dp"
+        android:layout_height="64dp"
+        android:layout_marginBottom="164dp"
+        android:text="\u2197"
+
+        android:textSize="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/btnRight"
+        app:layout_constraintHorizontal_bias="0.332"
+        app:layout_constraintStart_toStartOf="@+id/btnRight" />
+
+    <Button
+        android:id="@+id/btnUpLeft"
+        android:layout_width="79dp"
+        android:layout_height="64dp"
+        android:layout_marginBottom="164dp"
+        android:text="\u2196"
+
+        android:textSize="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/btnLeft"
+        app:layout_constraintHorizontal_bias="0.332"
+        app:layout_constraintStart_toStartOf="@+id/btnLeft" />
+
+    <Button
+        android:id="@+id/btnDownLeft"
+        android:layout_width="79dp"
+        android:layout_height="64dp"
+        android:layout_marginBottom="40dp"
+        android:text="\u2199"
+
+        android:textSize="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/btnLeft"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/btnLeft" />
+
+    <Button
+        android:id="@+id/btnDownRight"
+        android:layout_width="79dp"
+        android:layout_height="64dp"
+        android:layout_marginBottom="40dp"
+        android:text="\u2198"
+
+        android:textSize="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/btnRight"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/btnRight" />
 
     <Button
         android:id="@+id/btnLeft"
@@ -131,7 +182,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="68dp"
-        android:text="y: 40.0"
+        android:text="y: 30.0"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.043"
         app:layout_constraintStart_toStartOf="parent"

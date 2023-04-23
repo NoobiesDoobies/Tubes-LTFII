@@ -40,9 +40,9 @@ void initActuator(){
 //  Arm1.setSpeed(15);
 
   Arm1.setMaxSpeed(STEPPER_SPEED);
-  Arm1.setAcceleration(STEPPER_SPEED);
+  Arm1.setAcceleration(STEPPER_SPEED/2);
   Arm2.setMaxSpeed(STEPPER_SPEED);
-  Arm2.setAcceleration(STEPPER_SPEED);
+  Arm2.setAcceleration(STEPPER_SPEED/2);
   
   // Set the initial position of the stepper motor to 0
   Arm1.setCurrentPosition(0);
