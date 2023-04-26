@@ -10616,6 +10616,7 @@ Created by Upverter.com</description>
 <part name="SUPPLY12" library="supply2" library_urn="urn:adsk.eagle:library:372" deviceset="+5V" device=""/>
 <part name="U2" library="STMicroelectronics - L7805CV" deviceset="STMICROELECTRONICS_L7805CV" device="STMICROELECTRONICS_L7805CV_0_0"/>
 <part name="SUPPLY13" library="supply2" library_urn="urn:adsk.eagle:library:372" deviceset="GND" device=""/>
+<part name="J5" library="1935161" deviceset="1935161" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -10725,18 +10726,22 @@ Created by Upverter.com</description>
 <instance part="SUPPLY11" gate="+5V" x="218.44" y="274.32" smashed="yes" rot="R180">
 <attribute name="VALUE" x="220.345" y="271.145" size="1.778" layer="96" rot="R180"/>
 </instance>
-<instance part="C1" gate="G$1" x="322.58" y="167.64" smashed="yes">
-<attribute name="NAME" x="326.263" y="170.6626" size="1.778" layer="95"/>
-<attribute name="VALUE" x="323.723" y="163.0426" size="1.778" layer="96"/>
+<instance part="C1" gate="G$1" x="322.58" y="170.18" smashed="yes">
+<attribute name="NAME" x="326.263" y="173.2026" size="1.778" layer="95"/>
+<attribute name="VALUE" x="323.723" y="165.5826" size="1.778" layer="96"/>
 </instance>
-<instance part="SUPPLY12" gate="+5V" x="322.58" y="185.42" smashed="yes">
-<attribute name="VALUE" x="320.675" y="188.595" size="1.778" layer="96"/>
+<instance part="SUPPLY12" gate="+5V" x="322.58" y="187.96" smashed="yes">
+<attribute name="VALUE" x="320.675" y="191.135" size="1.778" layer="96"/>
 </instance>
-<instance part="U2" gate="G$0" x="292.1" y="182.88" smashed="yes">
-<attribute name="NAME" x="294.64" y="180.34" size="2.54" layer="95" align="top-left"/>
+<instance part="U2" gate="G$0" x="292.1" y="185.42" smashed="yes">
+<attribute name="NAME" x="294.64" y="182.88" size="2.54" layer="95" align="top-left"/>
 </instance>
-<instance part="SUPPLY13" gate="GND" x="276.86" y="167.64" smashed="yes">
-<attribute name="VALUE" x="274.955" y="164.465" size="1.778" layer="96"/>
+<instance part="SUPPLY13" gate="GND" x="276.86" y="170.18" smashed="yes">
+<attribute name="VALUE" x="274.955" y="167.005" size="1.778" layer="96"/>
+</instance>
+<instance part="J5" gate="G$1" x="259.08" y="175.26" smashed="yes" rot="R180">
+<attribute name="NAME" x="261.62548125" y="169.532659375" size="1.272740625" layer="95" rot="R180"/>
+<attribute name="VALUE" x="261.62808125" y="182.90423125" size="1.274040625" layer="96" rot="R180"/>
 </instance>
 </instances>
 <busses>
@@ -10794,15 +10799,18 @@ Created by Upverter.com</description>
 <wire x1="210.82" y1="276.86" x2="213.36" y2="276.86" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<pinref part="SUPPLY13" gate="GND" pin="GND"/>
-<wire x1="276.86" y1="170.18" x2="289.56" y2="170.18" width="0.1524" layer="91"/>
 <pinref part="C1" gate="G$1" pin="-"/>
-<wire x1="322.58" y1="162.56" x2="322.58" y2="160.02" width="0.1524" layer="91"/>
-<wire x1="322.58" y1="160.02" x2="314.96" y2="160.02" width="0.1524" layer="91"/>
+<wire x1="322.58" y1="165.1" x2="322.58" y2="162.56" width="0.1524" layer="91"/>
+<wire x1="322.58" y1="162.56" x2="314.96" y2="162.56" width="0.1524" layer="91"/>
 <pinref part="U2" gate="G$0" pin="GROUND"/>
-<wire x1="289.56" y1="160.02" x2="314.96" y2="160.02" width="0.1524" layer="91"/>
-<wire x1="314.96" y1="160.02" x2="314.96" y2="167.64" width="0.1524" layer="91"/>
-<wire x1="289.56" y1="170.18" x2="289.56" y2="160.02" width="0.1524" layer="91"/>
+<wire x1="289.56" y1="162.56" x2="314.96" y2="162.56" width="0.1524" layer="91"/>
+<wire x1="314.96" y1="162.56" x2="314.96" y2="170.18" width="0.1524" layer="91"/>
+<wire x1="289.56" y1="172.72" x2="289.56" y2="162.56" width="0.1524" layer="91"/>
+<pinref part="SUPPLY13" gate="GND" pin="GND"/>
+<wire x1="276.86" y1="172.72" x2="289.56" y2="172.72" width="0.1524" layer="91"/>
+<pinref part="J5" gate="G$1" pin="1"/>
+<wire x1="266.7" y1="172.72" x2="276.86" y2="172.72" width="0.1524" layer="91"/>
+<junction x="276.86" y="172.72"/>
 </segment>
 </net>
 <net name="DO3" class="0">
@@ -10903,11 +10911,11 @@ Created by Upverter.com</description>
 <segment>
 <pinref part="C1" gate="G$1" pin="+"/>
 <pinref part="SUPPLY12" gate="+5V" pin="+5V"/>
-<wire x1="322.58" y1="182.88" x2="322.58" y2="172.72" width="0.1524" layer="91"/>
+<wire x1="322.58" y1="185.42" x2="322.58" y2="175.26" width="0.1524" layer="91"/>
 <pinref part="U2" gate="G$0" pin="OUTPUT"/>
-<wire x1="322.58" y1="172.72" x2="322.58" y2="170.18" width="0.1524" layer="91"/>
-<wire x1="314.96" y1="172.72" x2="322.58" y2="172.72" width="0.1524" layer="91"/>
-<junction x="322.58" y="172.72"/>
+<wire x1="322.58" y1="175.26" x2="322.58" y2="172.72" width="0.1524" layer="91"/>
+<wire x1="314.96" y1="175.26" x2="322.58" y2="175.26" width="0.1524" layer="91"/>
+<junction x="322.58" y="175.26"/>
 </segment>
 </net>
 <net name="CLK" class="0">
@@ -11146,17 +11154,18 @@ Created by Upverter.com</description>
 <label x="35.56" y="266.7" size="1.778" layer="95"/>
 </segment>
 </net>
+<net name="N$2" class="0">
+<segment>
+<pinref part="U1" gate="G$0" pin="INPUT"/>
+<pinref part="J3" gate="G$1" pin="2"/>
+<wire x1="266.7" y1="208.28" x2="289.56" y2="208.28" width="0.1524" layer="91"/>
+</segment>
+</net>
 <net name="N$1" class="0">
 <segment>
-<pinref part="J3" gate="G$1" pin="2"/>
-<pinref part="U1" gate="G$0" pin="INPUT"/>
-<wire x1="266.7" y1="208.28" x2="289.56" y2="208.28" width="0.1524" layer="91"/>
-<wire x1="266.7" y1="208.28" x2="266.7" y2="215.9" width="0.1524" layer="91"/>
-<junction x="266.7" y="208.28"/>
-<wire x1="266.7" y1="215.9" x2="251.46" y2="215.9" width="0.1524" layer="91"/>
+<pinref part="J5" gate="G$1" pin="2"/>
 <pinref part="U2" gate="G$0" pin="INPUT"/>
-<wire x1="251.46" y1="215.9" x2="251.46" y2="175.26" width="0.1524" layer="91"/>
-<wire x1="251.46" y1="175.26" x2="289.56" y2="175.26" width="0.1524" layer="91"/>
+<wire x1="266.7" y1="177.8" x2="289.56" y2="177.8" width="0.1524" layer="91"/>
 </segment>
 </net>
 </nets>

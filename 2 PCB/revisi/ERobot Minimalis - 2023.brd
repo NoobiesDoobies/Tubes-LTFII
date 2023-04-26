@@ -7,7 +7,7 @@
 <setting keepoldvectorfont="yes"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="50" unitdist="mil" unit="mm" style="lines" multiple="1" display="yes" altdistance="12.5" altunitdist="mil" altunit="mm"/>
+<grid distance="50" unitdist="mil" unit="mil" style="lines" multiple="1" display="yes" altdistance="12.5" altunitdist="mil" altunit="mil"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="yes" active="yes"/>
 <layer number="2" name="Route2" color="1" fill="3" visible="no" active="no"/>
@@ -1749,23 +1749,23 @@ design rules under a new name.</description>
 <attribute name="POPULARITY" value="92" x="58.42" y="35.56" size="1.778" layer="27" display="off"/>
 <attribute name="VALUE" x="54.61" y="32.385" size="1.27" layer="27"/>
 </element>
-<element name="U1" library="STMicroelectronics - L7805CV" package="STMICROELECTRONICS_L7805CV_0" value="STMICROELECTRONICS_L7805CVSTMICROELECTRONICS_L7805CV_0_0" x="7.62" y="19.05" smashed="yes">
-<attribute name="CENTROID_NOT_SPECIFIED" value="No" x="7.62" y="19.05" size="1.778" layer="27" display="off"/>
-<attribute name="DATASHEET" value="http://www.st.com/content/ccc/resource/technical/document/datasheet/41/4f/b3/b0/12/d4/47/88/CD00000444.pdf/files/CD00000444.pdf/jcr:content/translations/en.CD00000444.pdf" x="7.62" y="19.05" size="1.778" layer="27" display="off"/>
-<attribute name="DIGIKEY_DESCRIPTION" value="IC REG LINEAR 5V 1.5A TO220AB" x="7.62" y="19.05" size="1.778" layer="27" display="off"/>
-<attribute name="DIGIKEY_PART_NUMBER" value="497-1443-5-ND" x="7.62" y="19.05" size="1.778" layer="27" display="off"/>
-<attribute name="IPC_LAND_PATTERN_NAME" value="TO-220" x="7.62" y="19.05" size="1.778" layer="27" display="off"/>
-<attribute name="LEAD_FREE" value="yes" x="7.62" y="19.05" size="1.778" layer="27" display="off"/>
-<attribute name="MF" value="STMicroelectronics" x="7.62" y="19.05" size="1.778" layer="27" display="off"/>
-<attribute name="MFG_PACKAGE_IDENT" value="TO-220-3" x="7.62" y="19.05" size="1.778" layer="27" display="off"/>
-<attribute name="MOUSER_PART_NUMBER" value="511-L7805CV" x="7.62" y="19.05" size="1.778" layer="27" display="off"/>
-<attribute name="MPN" value="L7805CV" x="7.62" y="19.05" size="1.778" layer="27" display="off"/>
-<attribute name="NAME" x="10.345" y="24.125" size="1" layer="25" rot="R270"/>
-<attribute name="PACKAGE" value="TO-220-3" x="7.62" y="19.05" size="1.778" layer="27" display="off"/>
-<attribute name="PREFIX" value="U" x="7.62" y="19.05" size="1.778" layer="27" display="off"/>
-<attribute name="ROHS" value="yes" x="7.62" y="19.05" size="1.778" layer="27" display="off"/>
-<attribute name="TEMPERATURE_RANGE_HIGH" value="+125°C" x="7.62" y="19.05" size="1.778" layer="27" display="off"/>
-<attribute name="TEMPERATURE_RANGE_LOW" value="0°C" x="7.62" y="19.05" size="1.778" layer="27" display="off"/>
+<element name="U1" library="STMicroelectronics - L7805CV" package="STMICROELECTRONICS_L7805CV_0" value="STMICROELECTRONICS_L7805CVSTMICROELECTRONICS_L7805CV_0_0" x="7.62" y="17.78" smashed="yes">
+<attribute name="CENTROID_NOT_SPECIFIED" value="No" x="7.62" y="17.78" size="1.778" layer="27" display="off"/>
+<attribute name="DATASHEET" value="http://www.st.com/content/ccc/resource/technical/document/datasheet/41/4f/b3/b0/12/d4/47/88/CD00000444.pdf/files/CD00000444.pdf/jcr:content/translations/en.CD00000444.pdf" x="7.62" y="17.78" size="1.778" layer="27" display="off"/>
+<attribute name="DIGIKEY_DESCRIPTION" value="IC REG LINEAR 5V 1.5A TO220AB" x="7.62" y="17.78" size="1.778" layer="27" display="off"/>
+<attribute name="DIGIKEY_PART_NUMBER" value="497-1443-5-ND" x="7.62" y="17.78" size="1.778" layer="27" display="off"/>
+<attribute name="IPC_LAND_PATTERN_NAME" value="TO-220" x="7.62" y="17.78" size="1.778" layer="27" display="off"/>
+<attribute name="LEAD_FREE" value="yes" x="7.62" y="17.78" size="1.778" layer="27" display="off"/>
+<attribute name="MF" value="STMicroelectronics" x="7.62" y="17.78" size="1.778" layer="27" display="off"/>
+<attribute name="MFG_PACKAGE_IDENT" value="TO-220-3" x="7.62" y="17.78" size="1.778" layer="27" display="off"/>
+<attribute name="MOUSER_PART_NUMBER" value="511-L7805CV" x="7.62" y="17.78" size="1.778" layer="27" display="off"/>
+<attribute name="MPN" value="L7805CV" x="7.62" y="17.78" size="1.778" layer="27" display="off"/>
+<attribute name="NAME" x="10.345" y="22.855" size="1" layer="25" rot="R270"/>
+<attribute name="PACKAGE" value="TO-220-3" x="7.62" y="17.78" size="1.778" layer="27" display="off"/>
+<attribute name="PREFIX" value="U" x="7.62" y="17.78" size="1.778" layer="27" display="off"/>
+<attribute name="ROHS" value="yes" x="7.62" y="17.78" size="1.778" layer="27" display="off"/>
+<attribute name="TEMPERATURE_RANGE_HIGH" value="+125°C" x="7.62" y="17.78" size="1.778" layer="27" display="off"/>
+<attribute name="TEMPERATURE_RANGE_LOW" value="0°C" x="7.62" y="17.78" size="1.778" layer="27" display="off"/>
 </element>
 <element name="J2" library="215297-6" package="TE_215297-6" value="215297-6" x="17.78" y="21.59" smashed="yes" rot="R270">
 <attribute name="AVAILABILITY" value="In Stock" x="17.78" y="21.59" size="1.778" layer="27" rot="R270" display="off"/>
@@ -1821,23 +1821,32 @@ design rules under a new name.</description>
 <attribute name="SPICEPREFIX" value="C" x="57.15" y="46.99" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="VALUE" x="38.862" y="50.546" size="1.27" layer="27" ratio="10" rot="R270"/>
 </element>
-<element name="U2" library="STMicroelectronics - L7805CV" package="STMICROELECTRONICS_L7805CV_0" value="STMICROELECTRONICS_L7805CVSTMICROELECTRONICS_L7805CV_0_0" x="7.62" y="39.37" smashed="yes" rot="R180">
-<attribute name="CENTROID_NOT_SPECIFIED" value="No" x="26.67" y="36.83" size="1.778" layer="27" rot="R180" display="off"/>
-<attribute name="DATASHEET" value="http://www.st.com/content/ccc/resource/technical/document/datasheet/41/4f/b3/b0/12/d4/47/88/CD00000444.pdf/files/CD00000444.pdf/jcr:content/translations/en.CD00000444.pdf" x="26.67" y="36.83" size="1.778" layer="27" rot="R180" display="off"/>
-<attribute name="DIGIKEY_DESCRIPTION" value="IC REG LINEAR 5V 1.5A TO220AB" x="26.67" y="36.83" size="1.778" layer="27" rot="R180" display="off"/>
-<attribute name="DIGIKEY_PART_NUMBER" value="497-1443-5-ND" x="26.67" y="36.83" size="1.778" layer="27" rot="R180" display="off"/>
-<attribute name="IPC_LAND_PATTERN_NAME" value="TO-220" x="26.67" y="36.83" size="1.778" layer="27" rot="R180" display="off"/>
-<attribute name="LEAD_FREE" value="yes" x="26.67" y="36.83" size="1.778" layer="27" rot="R180" display="off"/>
-<attribute name="MF" value="STMicroelectronics" x="26.67" y="36.83" size="1.778" layer="27" rot="R180" display="off"/>
-<attribute name="MFG_PACKAGE_IDENT" value="TO-220-3" x="26.67" y="36.83" size="1.778" layer="27" rot="R180" display="off"/>
-<attribute name="MOUSER_PART_NUMBER" value="511-L7805CV" x="26.67" y="36.83" size="1.778" layer="27" rot="R180" display="off"/>
-<attribute name="MPN" value="L7805CV" x="26.67" y="36.83" size="1.778" layer="27" rot="R180" display="off"/>
-<attribute name="NAME" x="4.895" y="38.105" size="1" layer="25" rot="R90"/>
-<attribute name="PACKAGE" value="TO-220-3" x="26.67" y="36.83" size="1.778" layer="27" rot="R180" display="off"/>
-<attribute name="PREFIX" value="U" x="26.67" y="36.83" size="1.778" layer="27" rot="R180" display="off"/>
-<attribute name="ROHS" value="yes" x="26.67" y="36.83" size="1.778" layer="27" rot="R180" display="off"/>
-<attribute name="TEMPERATURE_RANGE_HIGH" value="+125°C" x="26.67" y="36.83" size="1.778" layer="27" rot="R180" display="off"/>
-<attribute name="TEMPERATURE_RANGE_LOW" value="0°C" x="26.67" y="36.83" size="1.778" layer="27" rot="R180" display="off"/>
+<element name="U2" library="STMicroelectronics - L7805CV" package="STMICROELECTRONICS_L7805CV_0" value="STMICROELECTRONICS_L7805CVSTMICROELECTRONICS_L7805CV_0_0" x="7.62" y="40.64" smashed="yes" rot="R180">
+<attribute name="CENTROID_NOT_SPECIFIED" value="No" x="26.67" y="38.1" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="DATASHEET" value="http://www.st.com/content/ccc/resource/technical/document/datasheet/41/4f/b3/b0/12/d4/47/88/CD00000444.pdf/files/CD00000444.pdf/jcr:content/translations/en.CD00000444.pdf" x="26.67" y="38.1" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="DIGIKEY_DESCRIPTION" value="IC REG LINEAR 5V 1.5A TO220AB" x="26.67" y="38.1" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="DIGIKEY_PART_NUMBER" value="497-1443-5-ND" x="26.67" y="38.1" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="IPC_LAND_PATTERN_NAME" value="TO-220" x="26.67" y="38.1" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="LEAD_FREE" value="yes" x="26.67" y="38.1" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="MF" value="STMicroelectronics" x="26.67" y="38.1" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="MFG_PACKAGE_IDENT" value="TO-220-3" x="26.67" y="38.1" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="MOUSER_PART_NUMBER" value="511-L7805CV" x="26.67" y="38.1" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="MPN" value="L7805CV" x="26.67" y="38.1" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="NAME" x="4.895" y="39.375" size="1" layer="25" rot="R90"/>
+<attribute name="PACKAGE" value="TO-220-3" x="26.67" y="38.1" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="PREFIX" value="U" x="26.67" y="38.1" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="ROHS" value="yes" x="26.67" y="38.1" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="TEMPERATURE_RANGE_HIGH" value="+125°C" x="26.67" y="38.1" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="TEMPERATURE_RANGE_LOW" value="0°C" x="26.67" y="38.1" size="1.778" layer="27" rot="R180" display="off"/>
+</element>
+<element name="J5" library="1935161" package="PHOENIX_1935161" value="1935161" x="7.62" y="29.21" smashed="yes" rot="R90">
+<attribute name="AVAILABILITY" value="In Stock" x="-7.62" y="17.78" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="DESCRIPTION" value=" 2 Position Wire to Board Terminal Block Horizontal with Board 0.197 (5.00mm) Through Hole " x="-7.62" y="17.78" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="MF" value="Phoenix Contact" x="-7.62" y="17.78" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="MP" value="1935161" x="-7.62" y="17.78" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="PACKAGE" value="None" x="-7.62" y="17.78" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="PRICE" value="None" x="-7.62" y="17.78" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="PURCHASE-URL" value="https://pricing.snapeda.com/search/part/1935161/?ref=eda" x="-7.62" y="17.78" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 </elements>
 <signals>
@@ -1866,7 +1875,8 @@ design rules under a new name.</description>
 <wire x1="15.24" y1="13.97" x2="17.78" y2="11.43" width="0.8128" layer="16"/>
 <wire x1="17.78" y1="31.75" x2="16.51" y2="31.75" width="0.8128" layer="16"/>
 <wire x1="16.51" y1="31.75" x2="15.24" y2="30.48" width="0.8128" layer="16"/>
-<wire x1="15.24" y1="30.48" x2="15.24" y2="13.97" width="0.8128" layer="16"/>
+<wire x1="15.24" y1="30.48" x2="15.24" y2="26.67" width="0.8128" layer="16"/>
+<wire x1="15.24" y1="26.67" x2="15.24" y2="13.97" width="0.8128" layer="16"/>
 <wire x1="17.78" y1="11.43" x2="17.78" y2="10.16" width="0.8128" layer="16"/>
 <wire x1="17.78" y1="10.16" x2="19.05" y2="8.89" width="0.8128" layer="16"/>
 <wire x1="19.05" y1="8.89" x2="20.28" y2="8.89" width="0.8128" layer="16"/>
@@ -1886,11 +1896,10 @@ design rules under a new name.</description>
 <wire x1="52.07" y1="3.81" x2="40.64" y2="3.81" width="0.8128" layer="16"/>
 <wire x1="35.052" y1="7.62" x2="22.86" y2="7.62" width="0.8128" layer="16"/>
 <wire x1="22.86" y1="7.62" x2="21.59" y2="8.89" width="0.8128" layer="16"/>
-<wire x1="3.81" y1="20.32" x2="3.81" y2="38.1" width="0.8128" layer="16"/>
-<wire x1="3.81" y1="20.32" x2="5.08" y2="19.05" width="0.8128" layer="16"/>
-<wire x1="5.08" y1="19.05" x2="7.015" y2="19.05" width="0.8128" layer="16"/>
-<wire x1="7.015" y1="19.05" x2="8.89" y2="19.05" width="0.8128" layer="16"/>
-<wire x1="8.89" y1="19.05" x2="10.16" y2="17.78" width="0.8128" layer="16"/>
+<wire x1="3.81" y1="19.05" x2="3.81" y2="38.1" width="0.8128" layer="16"/>
+<wire x1="3.81" y1="19.05" x2="5.08" y2="17.78" width="0.8128" layer="16"/>
+<wire x1="5.08" y1="17.78" x2="7.015" y2="17.78" width="0.8128" layer="16"/>
+<wire x1="7.015" y1="17.78" x2="10.16" y2="17.78" width="0.8128" layer="16"/>
 <wire x1="10.16" y1="17.78" x2="10.16" y2="12.7" width="0.8128" layer="16"/>
 <wire x1="10.16" y1="12.7" x2="12.7" y2="10.16" width="0.8128" layer="16"/>
 <wire x1="12.7" y1="10.16" x2="12.7" y2="7.62" width="0.8128" layer="16"/>
@@ -1898,8 +1907,8 @@ design rules under a new name.</description>
 <wire x1="15.24" y1="5.08" x2="21.59" y2="5.08" width="0.8128" layer="16"/>
 <wire x1="21.59" y1="5.08" x2="22.86" y2="6.35" width="0.8128" layer="16"/>
 <wire x1="22.86" y1="6.35" x2="22.86" y2="7.62" width="0.8128" layer="16"/>
-<wire x1="3.81" y1="38.1" x2="5.08" y2="39.37" width="0.8128" layer="16"/>
-<wire x1="5.08" y1="39.37" x2="8.225" y2="39.37" width="0.8128" layer="16"/>
+<wire x1="3.81" y1="38.1" x2="6.35" y2="40.64" width="0.8128" layer="16"/>
+<wire x1="6.35" y1="40.64" x2="8.225" y2="40.64" width="0.8128" layer="16"/>
 <wire x1="41.91" y1="45.212" x2="43.942" y2="43.18" width="0.8128" layer="16"/>
 <wire x1="43.942" y1="43.18" x2="46.99" y2="43.18" width="0.8128" layer="16"/>
 <wire x1="50.6" y1="43.19" x2="50.61" y2="43.18" width="0.8128" layer="16"/>
@@ -1908,9 +1917,12 @@ design rules under a new name.</description>
 <wire x1="60.96" y1="41.91" x2="60.96" y2="40.64" width="0.8128" layer="16"/>
 <wire x1="39.37" y1="2.54" x2="12.7" y2="2.54" width="0.8128" layer="16"/>
 <wire x1="12.7" y1="2.54" x2="10.16" y2="5.08" width="0.8128" layer="16"/>
-<wire x1="3.81" y1="14.7857875" x2="3.81" y2="20.32" width="0.8128" layer="16"/>
+<wire x1="3.81" y1="14.7857875" x2="3.81" y2="19.05" width="0.8128" layer="16"/>
 <wire x1="10.16" y1="5.08" x2="10.16" y2="8.4357875" width="0.8128" layer="16"/>
 <wire x1="10.16" y1="8.4357875" x2="3.81" y2="14.7857875" width="0.8128" layer="16"/>
+<contactref element="J5" pad="1"/>
+<wire x1="7.62" y1="26.71" x2="15.2" y2="26.71" width="0.8128" layer="16"/>
+<wire x1="15.2" y1="26.71" x2="15.24" y2="26.67" width="0.8128" layer="16"/>
 </signal>
 <signal name="DO3">
 <contactref element="ESP32" pad="28"/>
@@ -1976,13 +1988,12 @@ design rules under a new name.</description>
 <wire x1="50.8" y1="5.08" x2="44.45" y2="5.08" width="0.8128" layer="16"/>
 <wire x1="44.45" y1="5.08" x2="41.91" y2="7.62" width="0.8128" layer="16"/>
 <wire x1="41.91" y1="7.62" x2="38.608" y2="7.62" width="0.8128" layer="16"/>
-<wire x1="7.015" y1="16.51" x2="7.015" y2="13.305" width="0.8128" layer="16"/>
+<wire x1="7.015" y1="15.24" x2="7.015" y2="13.305" width="0.8128" layer="16"/>
 <wire x1="11.43" y1="6.35" x2="13.97" y2="3.81" width="0.8128" layer="16"/>
 <wire x1="7.015" y1="13.305" x2="11.43" y2="8.89" width="0.8128" layer="16"/>
 <wire x1="11.43" y1="8.89" x2="11.43" y2="6.35" width="0.8128" layer="16"/>
 <wire x1="13.97" y1="3.81" x2="36.83" y2="3.81" width="0.8128" layer="16"/>
-<wire x1="8.225" y1="41.91" x2="10.16" y2="41.91" width="0.8128" layer="16"/>
-<wire x1="10.16" y1="41.91" x2="11.43" y2="43.18" width="0.8128" layer="16"/>
+<wire x1="8.225" y1="43.18" x2="11.43" y2="43.18" width="0.8128" layer="16"/>
 <wire x1="11.43" y1="45.72" x2="17.78" y2="52.07" width="0.8128" layer="16"/>
 <wire x1="11.43" y1="43.18" x2="11.43" y2="45.72" width="0.8128" layer="16"/>
 <wire x1="17.78" y1="52.07" x2="38.608" y2="52.07" width="0.8128" layer="16"/>
@@ -2125,19 +2136,24 @@ design rules under a new name.</description>
 <wire x1="26.67" y1="15.24" x2="26.66" y2="15.25" width="0.8128" layer="16"/>
 <wire x1="26.67" y1="15.24" x2="25.83" y2="15.25" width="0" layer="19" extent="16-16"/>
 </signal>
-<signal name="N$1">
+<signal name="N$2">
 <contactref element="J3" pad="2"/>
 <contactref element="U1" pad="1"/>
+<wire x1="15.28" y1="8.89" x2="15.24" y2="8.93" width="0.8128" layer="16"/>
+<wire x1="15.24" y1="8.93" x2="15.24" y2="10.16" width="0.8128" layer="16"/>
+<wire x1="15.24" y1="10.16" x2="12.7" y2="12.7" width="0.8128" layer="16"/>
+<wire x1="12.7" y1="19.05" x2="11.43" y2="20.32" width="0.8128" layer="16"/>
+<wire x1="11.43" y1="20.32" x2="7.015" y2="20.32" width="0.8128" layer="16"/>
+<wire x1="12.7" y1="12.7" x2="12.7" y2="19.05" width="0.8128" layer="16"/>
+</signal>
+<signal name="N$1">
+<contactref element="J5" pad="2"/>
 <contactref element="U2" pad="1"/>
-<wire x1="15.28" y1="8.89" x2="15.28" y2="10.16" width="0.8128" layer="16"/>
-<wire x1="15.28" y1="10.16" x2="12.7" y2="12.74" width="0.8128" layer="16"/>
-<wire x1="12.7" y1="12.74" x2="12.7" y2="19.05" width="0.8128" layer="16"/>
-<wire x1="12.7" y1="19.05" x2="10.16" y2="21.59" width="0.8128" layer="16"/>
-<wire x1="10.16" y1="21.59" x2="7.015" y2="21.59" width="0.8128" layer="16"/>
-<wire x1="10.16" y1="21.59" x2="11.43" y2="22.86" width="0.8128" layer="16"/>
-<wire x1="11.43" y1="22.86" x2="11.43" y2="35.56" width="0.8128" layer="16"/>
-<wire x1="11.43" y1="35.56" x2="10.16" y2="36.83" width="0.8128" layer="16"/>
-<wire x1="10.16" y1="36.83" x2="8.225" y2="36.83" width="0.8128" layer="16"/>
+<wire x1="8.225" y1="38.1" x2="8.89" y2="38.1" width="0.8128" layer="16"/>
+<wire x1="8.89" y1="38.1" x2="11.43" y2="35.56" width="0.8128" layer="16"/>
+<wire x1="11.43" y1="35.56" x2="11.43" y2="33.02" width="0.8128" layer="16"/>
+<wire x1="10.12" y1="31.71" x2="7.62" y2="31.71" width="0.8128" layer="16"/>
+<wire x1="11.43" y1="33.02" x2="10.12" y2="31.71" width="0.8128" layer="16"/>
 </signal>
 </signals>
 <mfgpreviewcolors>
