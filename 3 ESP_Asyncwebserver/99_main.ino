@@ -11,7 +11,8 @@ void setup() {
 
   // initEEPROM();
   initWiFi(); 
-  initActuator();  
+  initStepper(); 
+  initServo(); 
   handleHTTP();
 
 
@@ -36,8 +37,9 @@ void loop() {
   if(!mode.equals(String("Slider"))){
     calculate_IK(x, y, z);
   }
+  moveServo();
+  moveStepper();
   
-  moveActuator();
   // if(!firstPing){
   //   checkConnection();
   // }

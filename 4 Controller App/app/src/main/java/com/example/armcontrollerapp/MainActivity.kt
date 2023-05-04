@@ -7,12 +7,15 @@ import android.os.Handler
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import com.example.armcontrollerapp.Globals.Companion.BASE_URL
 import com.example.armcontrollerapp.Globals.Companion.x
 import com.example.armcontrollerapp.Globals.Companion.y
 import com.example.armcontrollerapp.Globals.Companion.z
+import com.example.armcontrollerapp.Globals.Companion.zIncrement
 
 import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.IO
+import java.io.IOException
 import java.net.HttpURLConnection
 import java.net.URL
 import kotlin.math.cos
@@ -24,12 +27,11 @@ class MainActivity : AppCompatActivity() {
     val DELAY_PING_MS = 1000L
     private var xIncrement: Double = 0.5
     private var yIncrement: Double = 0.5
-    private var zIncrement: Double = 0.3
 
-    private var BASE_URL: String = "http://192.168.4.1"
     private var mode: String = "Arrows"
     private val handler = Handler()
     private var runnable: Runnable? = null
+
 
     public suspend fun sendPing(): Unit{
         val url = URL(BASE_URL)
@@ -65,24 +67,29 @@ class MainActivity : AppCompatActivity() {
     }
 
     public suspend fun sendDataToESP(): Unit{
-        val url = URL(String.format("%s/posts?mode=%s&x=%.2f&y=%.2f&z=%.2f", BASE_URL, mode, x, y, z))
-        val job = withTimeoutOrNull(TIME_OUT){
-            with(url.openConnection() as HttpURLConnection) {
-                requestMethod = "GET"  // optional default is GET
+        try{
+            val url = URL(String.format("%s/posts?mode=%s&x=%.2f&y=%.2f&z=%d", BASE_URL, mode, x, y, z))
+            val job = withTimeoutOrNull(TIME_OUT){
+                with(url.openConnection() as HttpURLConnection) {
+                    requestMethod = "GET"  // optional default is GET
 
-                println("\nSent 'GET' request to URL : $url; Response Code : $responseCode")
+                    println("\nSent 'GET' request to URL : $url; Response Code : $responseCode")
 
-                inputStream.bufferedReader().use {
-                    it.lines().forEach { line ->
-                        println(line)
+                    inputStream.bufferedReader().use {
+                        it.lines().forEach { line ->
+                            println(line)
+                        }
                     }
                 }
             }
+            if(job == null){
+                val cancelMessage = "Job took longer than $TIME_OUT"
+                println("debug: $cancelMessage")
+            }
+        }catch (e: IOException) {
+            println("IOException occurred: ${e.message}")
         }
-        if(job == null){
-            val cancelMessage = "Job took longer than $TIME_OUT"
-            println("debug: $cancelMessage")
-        }
+
 
     }
 
@@ -92,6 +99,7 @@ class MainActivity : AppCompatActivity() {
         Toast.makeText(this, message, Toast.LENGTH_SHORT)
             .show()
     }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
@@ -120,6 +128,10 @@ class MainActivity : AppCompatActivity() {
         val modes = resources.getStringArray(R.array.mode)
         var adapter: ArrayAdapter<CharSequence> = ArrayAdapter.createFromResource(this, R.array.mode, android.R.layout.simple_spinner_item)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_item)
+
+        xText.text = String.format("x: %.1f", x)
+        yText.text = String.format("y: %.1f", y)
+        zText.text = String.format("z: %d", z)
 
         spinner.setAdapter(adapter)
 
@@ -237,7 +249,8 @@ class MainActivity : AppCompatActivity() {
 
         btnZPos.setOnClickListener{
             z += zIncrement
-            zText.text = String.format("z: %.1f", z)
+            z = z.coerceIn(0, 2)
+            zText.text = String.format("z: %d", z)
             CoroutineScope(IO).launch{
                 sendDataToESP()
             }
@@ -246,7 +259,8 @@ class MainActivity : AppCompatActivity() {
 
         btnZNeg.setOnClickListener{
             z -= zIncrement
-            zText.text = String.format("z: %.1f", z)
+            z = z.coerceIn(0, 2)
+            zText.text = String.format("z: %d", z)
             CoroutineScope(IO).launch{
                 sendDataToESP()
             }
@@ -255,10 +269,10 @@ class MainActivity : AppCompatActivity() {
         btnCalibrate.setOnClickListener{
             x = 0.0
             y = 30.0
-            z = 0.0
+            z = 0
             xText.text = String.format("x: %.1f", x)
             yText.text = String.format("y: %.1f", y)
-            zText.text = String.format("z: %.1f", z)
+            zText.text = String.format("z: %d", z)
             alert("Calibrated successfully to (0,0,0)")
             CoroutineScope(IO).launch{
                 sendDataToESP()

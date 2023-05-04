@@ -23,7 +23,7 @@
 // }
 
 // void storeXYZToFlash(float x, float y, float z){
-//   storeFloatInFlash(0, x);
+//   storeFloatInFlash(0, x); 
 //   storeFloatInFlash(10, y);
 //   storeFloatInFlash(20, z);
 // }

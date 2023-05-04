@@ -1,12 +1,16 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+
 }
+
 
 android {
     namespace 'com.example.armcontrollerapp'
     compileSdk 33
-
+    buildFeatures{
+        viewBinding true
+    }
     defaultConfig {
         applicationId "com.example.armcontrollerapp"
         minSdk 24

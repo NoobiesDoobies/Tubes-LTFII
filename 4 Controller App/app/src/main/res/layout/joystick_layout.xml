@@ -9,6 +9,20 @@
     tools:layout_editor_absoluteY="-5dp"
     tools:ignore="MissingClass">
 
+
+    <com.google.android.material.slider.Slider
+        android:id="@+id/speedSlider"
+        android:layout_width="220dp"
+        android:layout_height="39dp"
+        android:contentDescription="Slider for Speed Using Joystick"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.499"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.239"
+        tools:ignore="MissingConstraints" />
+
     <Button
         android:id="@+id/btnZPos"
         android:layout_width="79dp"
@@ -74,11 +88,22 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/speedSliderText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:textSize="15dp"
+        app:layout_constraintEnd_toEndOf="@+id/speedSlider"
+        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintStart_toStartOf="@+id/speedSlider"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
         android:id="@+id/xText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="44dp"
-        android:text="x: 0.0"
+        android:text=""
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.043"
         app:layout_constraintStart_toStartOf="parent"
@@ -89,7 +114,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="68dp"
-        android:text="y: 30.0"
+        android:text= ""
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.043"
         app:layout_constraintStart_toStartOf="parent"
@@ -100,7 +125,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:text="z: 0.0"
+        android:text=""
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.043"
         app:layout_constraintStart_toStartOf="parent"
@@ -132,6 +157,9 @@
         android:ellipsize="end"
         android:maxLines="1"
         android:padding="16dp"
+        android:scaleX="1.2"
+        android:scaleY="1.2"
+        android:contentDescription="Select Mode"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/calibrate"
         app:layout_constraintHorizontal_bias="0.614"

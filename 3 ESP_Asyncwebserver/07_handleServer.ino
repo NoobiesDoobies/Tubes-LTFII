@@ -32,12 +32,12 @@ void handleHTTP(){
 //         Serial.println("------");
 //      }
 //
-//      int params = request->params();
-//      for (int i = 0; i < params; i++)
-//      {
-//        AsyncWebParameter* p = request->getParam(i);
-//        Serial.printf("POST[%s]: %s\n", p->name().c_str(), p->value().c_str());
-//      }
+      int params = request->params();
+      for (int i = 0; i < params; i++)
+      {
+        AsyncWebParameter* p = request->getParam(i);
+        Serial.printf("POST[%s]: %s\n", p->name().c_str(), p->value().c_str());
+      }
 
       AsyncWebParameter* p = request->getParam(0);
 //      const char *mode = p->value().c_str();
@@ -49,7 +49,7 @@ void handleHTTP(){
           p = request->getParam(2);
           y = p->value().toFloat();
           p = request->getParam(3);
-          z = p->value().toFloat();
+          z = p->value().toInt();
           
       }
       else if(mode.equals(String("JoyStick"))){
@@ -58,11 +58,7 @@ void handleHTTP(){
           p = request->getParam(2);
           y = p->value().toFloat();
           p = request->getParam(3);
-          z = p->value().toFloat();
-
-          x = constrain(x, 0, 40);
-          y = constrain(y, 0, 40);
-          
+          z = p->value().toInt();          
       }
       else if(mode.equals(String("Slider"))){
           p = request->getParam(4);
@@ -80,11 +76,15 @@ void handleHTTP(){
           p = request->getParam(2);
           arm2Angle = p->value().toFloat()*GEAR_RATIO_2;
           p = request->getParam(3);
-          endEffectorAngle = p->value().toFloat();
+          z = p->value().toInt();
       }
 
+//          x = constrain(x, 0, 40);
+//          y = constrain(y, 0, 40);
+//          z = constrain(z, 0, 2);
+
         if(mode[0] == 'S'){
-//         Serial.println("Arm1: " + String(arm1Angle) + "\tArm2: " + String(arm2Angle) + "\tEnd Effector: " + String(endEffectorAngle) + "\tOffset1: " + String(arm1Offset) + "\tOffset2:  " + String(arm2Offset) + "\tCalibrate: " + String(calibrate));
+//         Serial.println("Arm1: " + String(arm1Angle) + "\tArm2: " + String(arm2Angle) + "\tZ: " + String(z) + "\tOffset1: " + String(arm1Offset) + "\tOffset2:  " + String(arm2Offset) + "\tCalibrate: " + String(calibrate));
 
         }
         else{
