@@ -9,9 +9,15 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.armcontrollerapp.Globals.Companion.BASE_URL
 import com.example.armcontrollerapp.Globals.Companion.x
+import com.example.armcontrollerapp.Globals.Companion.xLowerLimit
+import com.example.armcontrollerapp.Globals.Companion.xUpperLimit
 import com.example.armcontrollerapp.Globals.Companion.y
+import com.example.armcontrollerapp.Globals.Companion.yLowerLimit
+import com.example.armcontrollerapp.Globals.Companion.yUpperLimit
 import com.example.armcontrollerapp.Globals.Companion.z
 import com.example.armcontrollerapp.Globals.Companion.zIncrement
+import com.example.armcontrollerapp.Globals.Companion.zLowerLimit
+import com.example.armcontrollerapp.Globals.Companion.zUpperLimit
 
 import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.IO
@@ -167,7 +173,7 @@ class MainActivity : AppCompatActivity() {
 
         btnLeft.setOnClickListener{
             x-=xIncrement
-            x = x.coerceIn(0.0, 30.0)
+            x = x.coerceIn(xLowerLimit, xUpperLimit)
             xText.text = String.format("x: %.1f", x)
             CoroutineScope(IO).launch{
                 sendDataToESP()
@@ -176,7 +182,7 @@ class MainActivity : AppCompatActivity() {
 
         btnRight.setOnClickListener{
             x+=xIncrement
-            x = x.coerceIn(0.0, 30.0)
+            x = x.coerceIn(xLowerLimit, xUpperLimit)
             xText.text = String.format("x: %.1f", x)
             CoroutineScope(IO).launch{
                 sendDataToESP()
@@ -185,7 +191,7 @@ class MainActivity : AppCompatActivity() {
 
         btnUp.setOnClickListener{
             y+=yIncrement
-            y = y.coerceIn(0.0, 30.0)
+            y = y.coerceIn(yLowerLimit, yUpperLimit)
             yText.text = String.format("y: %.1f", y)
             CoroutineScope(IO).launch{
                 sendDataToESP()
@@ -194,7 +200,7 @@ class MainActivity : AppCompatActivity() {
 
         btnDown.setOnClickListener{
             y-=yIncrement
-            y = y.coerceIn(0.0, 30.0)
+            y = y.coerceIn(yLowerLimit, yUpperLimit)
             yText.text = String.format("y: %.1f", y)
             CoroutineScope(IO).launch{
                 sendDataToESP()
@@ -204,9 +210,9 @@ class MainActivity : AppCompatActivity() {
 
         btnUpRight.setOnClickListener{
             x+=xIncrement
-            x = x.coerceIn(0.0, 30.0)
+            x = x.coerceIn(xLowerLimit, xUpperLimit)
             y+=yIncrement
-            y = y.coerceIn(0.0, 30.0)
+            y = y.coerceIn(yLowerLimit, yUpperLimit)
             xText.text = String.format("x: %.1f", x)
             yText.text = String.format("y: %.1f", y)
             CoroutineScope(IO).launch{
@@ -215,9 +221,9 @@ class MainActivity : AppCompatActivity() {
         }
         btnUpLeft.setOnClickListener{
             x-=xIncrement
-            x = x.coerceIn(0.0, 30.0)
+            x = x.coerceIn(xLowerLimit, xUpperLimit)
             y+=yIncrement
-            y = y.coerceIn(0.0, 30.0)
+            y = y.coerceIn(yLowerLimit, yUpperLimit)
             xText.text = String.format("x: %.1f", x)
             yText.text = String.format("y: %.1f", y)
             CoroutineScope(IO).launch{
@@ -226,9 +232,9 @@ class MainActivity : AppCompatActivity() {
         }
         btnDownLeft.setOnClickListener{
             x-=xIncrement
-            x = x.coerceIn(0.0, 30.0)
+            x = x.coerceIn(xLowerLimit, xUpperLimit)
             y-=yIncrement
-            y = y.coerceIn(0.0, 30.0)
+            y = y.coerceIn(yLowerLimit, yUpperLimit)
             xText.text = String.format("x: %.1f", x)
             yText.text = String.format("y: %.1f", y)
             CoroutineScope(IO).launch{
@@ -237,9 +243,9 @@ class MainActivity : AppCompatActivity() {
         }
         btnDownRight.setOnClickListener{
             x+=xIncrement
-            x = x.coerceIn(0.0, 30.0)
+            x = x.coerceIn(xLowerLimit, xUpperLimit)
             y-=yIncrement
-            y = y.coerceIn(0.0, 30.0)
+            y = y.coerceIn(yLowerLimit, yUpperLimit)
             xText.text = String.format("x: %.1f", x)
             yText.text = String.format("y: %.1f", y)
             CoroutineScope(IO).launch{
@@ -249,7 +255,7 @@ class MainActivity : AppCompatActivity() {
 
         btnZPos.setOnClickListener{
             z += zIncrement
-            z = z.coerceIn(0, 2)
+            z = z.coerceIn(zLowerLimit, zUpperLimit)
             zText.text = String.format("z: %d", z)
             CoroutineScope(IO).launch{
                 sendDataToESP()
@@ -259,7 +265,7 @@ class MainActivity : AppCompatActivity() {
 
         btnZNeg.setOnClickListener{
             z -= zIncrement
-            z = z.coerceIn(0, 2)
+            z = z.coerceIn(zLowerLimit, zUpperLimit)
             zText.text = String.format("z: %d", z)
             CoroutineScope(IO).launch{
                 sendDataToESP()
@@ -267,13 +273,10 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnCalibrate.setOnClickListener{
-            x = 0.0
-            y = 30.0
-            z = 0
+            x = xLowerLimit
+            y = yUpperLimit
             xText.text = String.format("x: %.1f", x)
             yText.text = String.format("y: %.1f", y)
-            zText.text = String.format("z: %d", z)
-            alert("Calibrated successfully to (0,0,0)")
             CoroutineScope(IO).launch{
                 sendDataToESP()
             }

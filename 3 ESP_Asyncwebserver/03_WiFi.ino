@@ -1,8 +1,8 @@
 #include <WiFi.h>
 
 // Replace with your network credentials
-const char* ssid = "kontol";
-const char* password = "kontol1234";
+const char* ssid = "RoboArm-Carlios";
+const char* password = "12345678";
 //void WiFiStationConnected(WiFiEvent_t event, WiFiEventInfo_t info){
 //   
 //  Serial.println("Station connected");

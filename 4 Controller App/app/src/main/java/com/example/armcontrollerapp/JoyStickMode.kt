@@ -24,6 +24,8 @@ import kotlin.math.cos
 import kotlin.math.sin
 import androidx.lifecycle.lifecycleScope
 import com.example.armcontrollerapp.Globals.Companion.BASE_URL
+import com.example.armcontrollerapp.Globals.Companion.R2
+import com.example.armcontrollerapp.Globals.Companion.SCALE_DOWN
 import com.example.armcontrollerapp.Globals.Companion.speed
 import com.example.armcontrollerapp.Globals.Companion.x
 import com.example.armcontrollerapp.Globals.Companion.xLowerLimit
@@ -39,10 +41,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
+import kotlin.math.sqrt
 
 
 class JoyStickMode : AppCompatActivity(), JoyStick.JoyStickListener {
-    val DELAY_MS: Long = 100
+    val DELAY_MS: Long = 500
     val TIME_OUT = 1000L
 
     val zIncrement: Int = 1
@@ -65,8 +68,8 @@ class JoyStickMode : AppCompatActivity(), JoyStick.JoyStickListener {
                 // Call your function here
                 x += -joystickPower*cos(joystickAngle)*speed
                 y += joystickPower*sin(joystickAngle)*speed
-                x = x.coerceIn(xLowerLimit, xUpperLimit)
-                y = y.coerceIn(yLowerLimit, yUpperLimit)
+                x = x.coerceIn(-sqrt(R2 - y*y), sqrt(R2 - y*y))
+                y = y.coerceIn(0.0, sqrt(R2 - x*x))
                 z = z.coerceIn(zLowerLimit, zUpperLimit)
                 xText.text = String.format("x: %.1f", x)
                 yText.text = String.format("y: %.1f", y)
@@ -144,10 +147,11 @@ class JoyStickMode : AppCompatActivity(), JoyStick.JoyStickListener {
         val zText = findViewById<TextView>(R.id.zText)
         val speedSlider = findViewById<Slider>(R.id.speedSlider)
         val speedSliderText = findViewById<TextView>(R.id.speedSliderText)
-        speedSlider.value = speed.toFloat()
-        speedSlider.valueFrom = speed.toFloat() / 10.0F
-        speedSlider.valueTo = speed.toFloat() * 10.0F
-        speedSliderText.text = String.format("Speed: %.1f%%", speed*1/speedSlider.valueFrom)
+        speedSlider.value = 10.0F
+        speedSlider.valueFrom = 0.0F
+        speedSlider.valueTo = 100.0F
+        speedSlider.isEnabled = true
+        speedSliderText.text = String.format("Speed: %.1f%%", speed)
 
         joystick.setListener(this)
 //        joystick.enableStayPut(true);
@@ -157,31 +161,30 @@ class JoyStickMode : AppCompatActivity(), JoyStick.JoyStickListener {
 
         btnZPos.setOnClickListener{
             z += zIncrement
-            z = z.coerceIn(0, 2)
+            z = z.coerceIn(zLowerLimit, zUpperLimit)
             zText.text = String.format("z: %d", z)
 
         }
 
         btnZNeg.setOnClickListener{
             z -= zIncrement
-            z = z.coerceIn(0, 2)
+            z = z.coerceIn(zLowerLimit, zUpperLimit)
             zText.text = String.format("z: %d", z)
         }
 
         btnCalibrate.setOnClickListener{
-            x = 0.0
-            y = 30.0
-            z = 0
+            x = yLowerLimit
+            y = yUpperLimit
+            z = zUpperLimit
             xText.text = String.format("x: %.1f", x)
             yText.text = String.format("y: %.1f", y)
             zText.text = String.format("z: %d", z)
-            alert("Calibrated successfully to (0,0,0)")
         }
 
         speedSlider.addOnChangeListener(object: Slider.OnChangeListener{
             override fun onValueChange(slider: Slider, value: Float, fromUser: Boolean) {
-                speed = slider.value.toDouble()
-                speedSliderText.text = String.format("Speed: %.1f%%", speed*1/speedSlider.valueFrom)
+                speed = slider.value.toDouble() * SCALE_DOWN
+                speedSliderText.text = String.format("Speed: %.1f%%", slider.value.toDouble())
 
             }
         })

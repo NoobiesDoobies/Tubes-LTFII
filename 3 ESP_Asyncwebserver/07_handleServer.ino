@@ -33,11 +33,11 @@ void handleHTTP(){
 //      }
 //
       int params = request->params();
-      for (int i = 0; i < params; i++)
-      {
-        AsyncWebParameter* p = request->getParam(i);
-        Serial.printf("POST[%s]: %s\n", p->name().c_str(), p->value().c_str());
-      }
+//      for (int i = 0; i < params; i++)
+//      {
+//        AsyncWebParameter* p = request->getParam(i);
+//        Serial.printf("POST[%s]: %s\n", p->name().c_str(), p->value().c_str());
+//      }
 
       AsyncWebParameter* p = request->getParam(0);
 //      const char *mode = p->value().c_str();
@@ -68,8 +68,10 @@ void handleHTTP(){
             arm1Offset = arm1Angle + arm1Offset;
             arm2Offset = arm2Angle + arm2Offset;
             Serial.println("Offset: " + String(arm1Offset));
-            x = 0.0;
-            y = 40.0;
+            x = xDefault;
+            y = yDefault;
+            Arm1.setCurrentPosition(0);
+            Arm2.setCurrentPosition(0);
           }
           p = request->getParam(1);
           arm1Angle = p->value().toFloat()*GEAR_RATIO_1;

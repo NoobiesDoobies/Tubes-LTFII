@@ -2,7 +2,10 @@
 #define SUDUT_MIN 0
 #define SUDUT_MAX 180
 
-#define STEPPER_SPEED 100
+#define STEPPER1_SPEED 100
+#define STEPPER2_SPEED 100
+
+#define CHANGE_DIRECTION_COUNTER_STEP 10
 
 float arm1CurrentAngle = 0;
 const float stepsPerRevolution = 2048;  // jumlah langkah per satu putaran penuh
@@ -38,10 +41,10 @@ void initStepper(){
 
 //  Arm1.setSpeed(15);
 
-  Arm1.setMaxSpeed(STEPPER_SPEED);
-  Arm1.setAcceleration(STEPPER_SPEED/2);
-  Arm2.setMaxSpeed(STEPPER_SPEED);
-  Arm2.setAcceleration(STEPPER_SPEED/2);
+  Arm1.setMaxSpeed(STEPPER1_SPEED);
+  Arm1.setAcceleration(STEPPER1_SPEED*2);
+  Arm2.setMaxSpeed(STEPPER2_SPEED);
+  Arm2.setAcceleration(STEPPER2_SPEED*2);
   
   // Set the initial position of the stepper motor to 0
   Arm1.setCurrentPosition(0);
@@ -75,6 +78,7 @@ void moveStepper(){
 //  Serial.println("offset: " + String(arm1Offset) + "\tstep: " + String(arm1Step) + "\tangle: " + String(arm1Angle));
   Arm1.moveTo(arm1Step);
   Arm2.moveTo(arm2Step);
+
 
   /* AccelStepper.h library */
   Arm1.run(); 
